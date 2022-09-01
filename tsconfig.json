@@ -14,7 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "#rtkstore/*": ["src/app/store/*"],
+      "#rtkhooks/*": ["src/app/hooks/*"],
+      "#rtkfeatures/*": ["src/features/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
