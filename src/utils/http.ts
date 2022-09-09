@@ -31,7 +31,7 @@ export const makeRequest = async <T>(
   }
 
   const httpRequest = await axios.request({
-    ...config,
+    ...config
   })
 
   return httpRequest
