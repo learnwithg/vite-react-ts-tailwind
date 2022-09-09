@@ -43,8 +43,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
-      "yarn lint",
-      "git add"
+      "yarn lint"
     ]
   }
 }
