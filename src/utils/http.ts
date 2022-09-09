@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-export type HttpError = AxiosError;
+export type HttpError = AxiosError
 
 const removedUndefinedProperty = <T extends object>(obj: T) => {
   for (const key in obj) {
@@ -10,61 +10,61 @@ const removedUndefinedProperty = <T extends object>(obj: T) => {
         (obj && obj[key] === undefined) ||
         obj[key] === null ||
         String(obj[key])?.length === 0 ||
-        String(obj[key]) === "Invalid Date";
+        String(obj[key]) === 'Invalid Date'
 
       if (IS_NOTHING) {
-        delete obj[key];
+        delete obj[key]
       }
     }
   }
-};
+}
 
 interface AxiosReqConfig extends AxiosRequestConfig {
-  token?: string;
+  token?: string
 }
 
 export const makeRequest = async <T>(
   config: AxiosReqConfig
 ): Promise<AxiosResponse<T>> => {
   if (config?.token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${config.token}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${config.token}`
   }
 
   const httpRequest = await axios.request({
     ...config,
-  });
+  })
 
-  return httpRequest;
-};
+  return httpRequest
+}
 
 axios.interceptors.request.use(
   (request) => {
-    removedUndefinedProperty(request.params);
+    removedUndefinedProperty(request.params)
 
-    return request;
+    return request
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 axios.interceptors.response.use(
   (response) => {
-    return response;
+    return response
   },
   (error: AxiosError) => {
-    console.log(error);
+    console.log(error)
 
-    let message = error.message;
+    let message = error.message
 
     if (Array.isArray(message)) {
-      message = message[0];
+      message = message[0]
     }
 
     if (!message) {
-      message = "Internal Server Error";
+      message = 'Internal Server Error'
     }
 
-    return Promise.reject(message);
+    return Promise.reject(message)
   }
-);
+)
