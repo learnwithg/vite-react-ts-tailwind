@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.tsx src",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "@auth0/auth0-react": "^1.10.2",
@@ -20,11 +22,31 @@
     "@types/node": "^18.7.16",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "@vitejs/plugin-react": "^2.1.0",
     "autoprefixer": "^10.4.8",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.3",
     "vite": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "yarn lint"
+    ]
   }
 }
