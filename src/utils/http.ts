@@ -1,15 +1,16 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-export interface HttpError extends AxiosError {}
+export type HttpError = AxiosError;
 
 const removedUndefinedProperty = <T extends object>(obj: T) => {
-  for (let key in obj) {
+  for (const key in obj) {
+    // eslint-disable-next-line no-prototype-builtins
     if (obj.hasOwnProperty(key)) {
       const IS_NOTHING =
         (obj && obj[key] === undefined) ||
         obj[key] === null ||
         String(obj[key])?.length === 0 ||
-        String(obj[key]) === 'Invalid Date';
+        String(obj[key]) === "Invalid Date";
 
       if (IS_NOTHING) {
         delete obj[key];
@@ -26,7 +27,7 @@ export const makeRequest = async <T>(
   config: AxiosReqConfig
 ): Promise<AxiosResponse<T>> => {
   if (config?.token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${config.token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${config.token}`;
   }
 
   const httpRequest = await axios.request({
@@ -61,7 +62,7 @@ axios.interceptors.response.use(
     }
 
     if (!message) {
-      message = 'Internal Server Error';
+      message = "Internal Server Error";
     }
 
     return Promise.reject(message);
