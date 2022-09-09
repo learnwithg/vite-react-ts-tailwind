@@ -7,17 +7,21 @@ import AllProducts from "./components/AllProducts";
 import Collections from "./components/Collections";
 import Account from "./components/Account";
 import Register from "./components/Register";
+import Login from "./components/Login";
 import Footer from "./components/Footer";
-
-import Navigation from "./UI/Navigation";
+import ProductDetails from "./components/ProductDetails";
 
 import Container from "./UI/Container";
 
 const App: React.FC = () => {
+  // const { data, error, isLoading } = useGetPokemonByNameQuery("");
+
+  // console.log(data);
+
   return (
     <div>
       <Navbar />
-      {/* <Navigation /> */}
+
       <Container>
         <Switch>
           <Route path="/" exact>
@@ -29,6 +33,9 @@ const App: React.FC = () => {
           <Route path="/collections/all" exact>
             <AllProducts />
           </Route>
+          <Route path="/collections/all/:productId">
+            <ProductDetails />
+          </Route>
           <Route path="/collections">
             <Collections />
           </Route>
@@ -37,6 +44,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/account/register">
             <Register />
+          </Route>
+          <Route path="/account/login">
+            <Login />
           </Route>
         </Switch>
       </Container>

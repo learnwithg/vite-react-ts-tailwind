@@ -4,8 +4,8 @@ import FeaturedProducts from "./FeaturedProducts";
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <img src={homeImg} alt="Page image" />
+    <div className="xl:px-80">
+      <img src={homeImg} alt="Page image" className="m-auto" />
       <FeaturedProducts />
     </div>
   );

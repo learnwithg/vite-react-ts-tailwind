@@ -4,9 +4,11 @@ import { FiMenu } from "react-icons/fi";
 
 import Button from "./Button";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-const MenuButton = () => {
+const MenuButton: React.FC = () => {
+  const history = useHistory();
+
   return (
     <div>
       <Menu>
@@ -24,7 +26,7 @@ const MenuButton = () => {
           <Menu.Items className="absolute -right-full mt-2 origin-top-right divide-y divide-gray-100 rounded-sm bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-4 text-center">
               <Menu.Item
-                className="text-white w-screen"
+                className="text-white w-screen hover:bg-orange-400"
                 as="div"
                 onClick={() => {
                   alert("Show Aler");
@@ -34,7 +36,7 @@ const MenuButton = () => {
               </Menu.Item>
 
               <Menu.Item
-                className="text-white w-screen px-20"
+                className="text-white w-screen px-20 hover:bg-orange-400"
                 as="div"
                 onClick={() => {
                   alert("Show Aler");
@@ -44,7 +46,7 @@ const MenuButton = () => {
               </Menu.Item>
 
               <Menu.Item
-                className="text-white w-screen px-20"
+                className="text-white w-screen px-20 hover:bg-orange-400"
                 as="div"
                 onClick={() => {
                   alert("Show Aler");
@@ -52,14 +54,11 @@ const MenuButton = () => {
               >
                 <Link to="/account/register">Register</Link>
               </Menu.Item>
-              <Menu.Item
-                className="text-white w-screen px-20 mt-5"
-                as="div"
-                onClick={() => {
-                  alert("Show Aler");
-                }}
-              >
-                <Button buttonName="Login" />
+              <Menu.Item className="text-white w-screen px-20 mt-5" as="div">
+                <Button
+                  buttonName="Login"
+                  onClickHandler={() => history.push("/account/login")}
+                />
               </Menu.Item>
             </div>
           </Menu.Items>

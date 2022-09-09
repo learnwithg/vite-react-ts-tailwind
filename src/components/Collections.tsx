@@ -5,9 +5,9 @@ const Collections: React.FC = () => {
   return (
     <div>
       Collections
-      <Route path="/collections/all">
+      {/* <Route path="/collections/all">
         <h1>All Products</h1>
-      </Route>
+      </Route> */}
     </div>
   );
 };
