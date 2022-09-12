@@ -58,6 +58,7 @@ axios.interceptors.response.use(
     let message = error.message
 
     if (Array.isArray(message)) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       message = message[0]
     }
 

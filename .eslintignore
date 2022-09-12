@@ -4,3 +4,11 @@ dist
 vite.config.ts
 
 postcss.config.cjs
+
+tsconfig.json
+
+tsconfig.node.json
+
+jest.config.cjs
+
+fileMock.js
