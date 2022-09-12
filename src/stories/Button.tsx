@@ -22,6 +22,7 @@ interface ButtonProps {
    * Optional click handler
    */
   onClick?: () => void
+  className: string
 }
 
 /**
@@ -32,6 +33,7 @@ export const Button = ({
   size = 'medium',
   backgroundColor,
   label,
+  className,
   ...props
 }: ButtonProps) => {
   const mode = primary
@@ -40,9 +42,7 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(
-        ' '
-      )}
+      className={[className, 'bg-red-100', mode].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
