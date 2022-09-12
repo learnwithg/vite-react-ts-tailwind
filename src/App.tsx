@@ -1,6 +1,4 @@
 import Login from './components/auth0/login'
-import React from 'react'
-
 function App() {
   return (
     <div>
