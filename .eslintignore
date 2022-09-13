@@ -11,4 +11,6 @@ tsconfig.node.json
 
 jest.config.cjs
 
+lint-staged.cjs
+
 fileMock.js
