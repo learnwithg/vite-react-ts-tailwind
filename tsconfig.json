@@ -19,7 +19,7 @@
     "paths": {
       "#rtkstore/*": ["src/app/store/*"],
       "#rtkhooks/*": ["src/app/hooks/*"],
-      "#rtkfeatures/*": ["src/features/*"]
+      "#rtkfeatures/*": ["src/app/features/*"]
     }
   },
   "include": ["src"],

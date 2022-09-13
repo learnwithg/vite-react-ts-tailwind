@@ -4,7 +4,6 @@ Application that will be used to replace https://github.com/kmcwebdev/erp-kmc-20
 
 <br>
 <br>
-<br>
 
 # Git Branches
 
@@ -41,7 +40,6 @@ git flow feature start {featureName}
 _This will create a new branch from `develop` called `feature/{featureName}`._
 
 <br>
-<br>
 
 ##### When working with multiple contributor for a single feature.
 
@@ -62,20 +60,6 @@ git flow feature pull {featureName}
 _This will pull other collaborators changes to your local repository_
 
 <br>
-<br>
-
-##### Finished Feature
-
-Action for finished `feature` and ready to release in `develop` branch.
-
-```bash
-git flow feature finish {featureName}
-```
-
-_This action will automatically merge `feature` branch to `develop` branch and remove `feature` branch locally and remotely._
-
-<br>
-<br>
 
 ##### Theres a BUG in _`develop`_ Branch?
 
@@ -91,7 +75,6 @@ _This will create a new branch from `develop` called `bugfix/{bugName}`._
 
 > **Tip:** Other Git flow commands are also applied to bug fixes (publish, pull, finish).
 
-<br>
 <br>
 
 ##### Theres a BUG in _`main`_ Branch?
@@ -109,6 +92,20 @@ _This will create a new branch from `main` called `hotfix/{hotfixName}`._
 > **Tip:** Other Git flow commands are also applied to bug fixes (publish, pull, finish).
 
 <br>
+
+##### Finished Feature / Bugfix / Hotfix
+
+Action for finished `feature`, `bugfix` and `hotfix`.
+
+```bash
+git flow pubish {feature/hotfix/bugfix} {name}
+```
+
+_This action will push your current local branch to remote repo and will be available for PR._
+
+> After publishing your local branch proceed on creating.
+> After PR is merged procced on deleting your local branch.
+
 <br>
 
 #### Ready to Release Feature from _`develop`_ Branch
@@ -123,7 +120,6 @@ git flow release start 1.0.8
 
 _This will create a new branch called `release/1.0.8` and if you finish it a new tag (1.0.8) is going to be merged into the `master`._
 
-<br>
 <br>
 <br>
 
