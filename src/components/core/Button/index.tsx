@@ -9,5 +9,5 @@ interface ButtonProps
 }
 
 export const Button: FCC<ButtonProps> = ({ ...rest }) => {
-  return <button {...rest}>Button</button>
+  return <button {...rest}></button>
 }
