@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:scripts": "eslint --ext .ts,.tsx src",
+    "lint:scripts": "eslint . --ext .ts,.tsx src",
     "lint:styles": "stylelint \"src/**/*.css\" --allow-empty-input",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --passWithNoTests",
+    "test:watch": "jest --passWithNoTests --watch",
     "lint-staged": "lint-staged --config lint-staged.cjs"
   },
   "dependencies": {

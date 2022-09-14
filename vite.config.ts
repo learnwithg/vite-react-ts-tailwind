@@ -9,6 +9,10 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        find: '#core',
+        replacement: path.resolve(__dirname, './src/components/core')
+      },
+      {
         find: '#rtkstore',
         replacement: path.resolve(__dirname, './src/app/store')
       },
