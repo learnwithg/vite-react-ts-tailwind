@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/await-thenable */
-import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import { Button } from './Button'
