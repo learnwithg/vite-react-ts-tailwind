@@ -1,3 +1,4 @@
+import { Button } from '#core/Button'
 import './header.css'
 
 type User = {
@@ -42,7 +43,7 @@ export const Header = ({ user }: HeaderProps) => (
         {user ? (
           <>
             <span className="welcome">
-              Welcome, <b>{user.name}</b>!
+              Welcome, <b>{user.name}</b>!<Button></Button>
             </span>
           </>
         ) : (
