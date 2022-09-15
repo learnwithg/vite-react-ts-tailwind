@@ -5,6 +5,8 @@ function App() {
     <div>
       <p className="text-center text-red-500">React Vites</p>
       <Login />
+
+      <p>test</p>
     </div>
   )
 }
