@@ -4,5 +4,5 @@ import App from './App'
 
 it('renders hello message', () => {
   render(<App />)
-  expect(screen.getByText('React Vite')).toBeInTheDocument()
+  expect(screen.getByText('React Vites')).toBeInTheDocument()
 })

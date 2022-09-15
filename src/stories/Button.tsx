@@ -1,4 +1,3 @@
-import React from 'react'
 import './button.css'
 
 interface ButtonProps {
@@ -30,7 +29,6 @@ interface ButtonProps {
  */
 export const Button = ({
   primary = false,
-  size = 'medium',
   backgroundColor,
   label,
   className,

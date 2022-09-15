@@ -24,7 +24,5 @@ const counterSlice = createSlice({
   }
 })
 
-asdasdasdasdasd
-
 export const { incremented, amountAdded } = counterSlice.actions
 export default counterSlice.reducer
