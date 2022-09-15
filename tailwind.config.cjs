@@ -22,17 +22,21 @@ module.exports = {
       colors: {
         blue: "#001738",
         pumpkin: "#FF7200",
+        danger: "#d72c0d",
+        pressed: "#fff4eb",
       },
       fontFamily: {
         Barlow: ["Barlow Condensed", "sans-serif"],
         Karla: ["Karla", "sans-serif"],
       },
       fontSize: {
+        tiny: "10px",
         xs: "16px",
         xl: "20px",
         l: "16px",
-        tiny: "10px",
+        leading: "14px",
         headingOne: "32px",
+        helper: "12px",
       },
     },
   },

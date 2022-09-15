@@ -1,9 +1,9 @@
 import React from "react";
 
-const MainPage: React.FC = () => {
+const HeaderPage: React.FC = () => {
   return (
     <React.Fragment>
-      <div className="leading-none">
+      <div className="leading-none py-8 mx-8 ">
         <h4 className="text-l font-Karla font-bold text-pumpkin ">
           ARMSTRONG 10TH
         </h4>
@@ -15,4 +15,4 @@ const MainPage: React.FC = () => {
   );
 };
 
-export default MainPage;
+export default HeaderPage;
