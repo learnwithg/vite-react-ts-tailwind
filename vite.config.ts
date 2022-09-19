@@ -1,9 +1,6 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import * as path from 'path'
-import { defineConfig } from 'vite'
 import WindiCSS from 'vite-plugin-windicss'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
@@ -14,16 +11,8 @@ export default defineConfig({
     WindiCSS(),
     cssInjectedByJsPlugin({ topExecutionPriority: false })
   ],
-  test: {
-    globals: true,
-    environment: 'jsdom'
-  },
   resolve: {
     alias: [
-      {
-        find: '#core',
-        replacement: path.resolve(__dirname, './src/components/core')
-      },
       {
         find: '#rtkstore',
         replacement: path.resolve(__dirname, './src/app/store')
