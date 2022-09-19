@@ -1,4 +1,4 @@
-import { Button } from '#core/Button'
+import { Button } from 'src/components/core/Button/Button'
 import { render, screen } from '@testing-library/react'
 
 describe('Accordion test', () => {
