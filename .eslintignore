@@ -18,3 +18,5 @@ fileMock.js
 test-utils.ts
 
 setupTests.ts
+
+tailwind.config.cjs
