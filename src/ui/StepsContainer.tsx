@@ -4,14 +4,14 @@ import { UserIcon } from "@heroicons/react/solid";
 import { CameraIcon } from "@heroicons/react/solid";
 import { CheckIcon } from "@heroicons/react/solid";
 
-let widthSize = 0;
+import { useAppSelector } from "../app/store/store";
 
 const StepsContainer: React.FC = () => {
-  const [width, setWidth] = useState(widthSize);
+  const widthSize = useAppSelector((state) => state.stepperState.width);
 
-  const size = { width: width.toString() + "%" };
+  const size = { width: widthSize.toString() + "%" };
 
-  console.log(size.width);
+  console.log(widthSize);
 
   return (
     <div className="w-full rounded bg-white flex gap-6 px-8 ">
@@ -32,7 +32,7 @@ const StepsContainer: React.FC = () => {
           <p className="text-tiny font-Karla font-bold text-gray-700 leading-none pb-2">
             STEP 1
           </p>
-          <p className="text-xs font-Karla font-bold leading-none ">
+          <p className="text-xs font-Karla font-bold leading-none">
             Fill up form{" "}
           </p>
         </div>

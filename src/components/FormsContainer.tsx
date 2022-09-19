@@ -1,10 +1,27 @@
 import React from "react";
 import FillUpForm from "./steps/FillUpForm";
+import Snapshot from "./steps/Snapshot";
+import ReviewForm from "./steps/ReviewForm";
+
+import { useAppSelector } from "../../src/app/store/store";
 
 const FormsContainer: React.FC = () => {
+  const formValidation = useAppSelector(
+    (state) => state.formsValidation.pagesValidation
+  );
+
   return (
     <div className="rounded w-full h-full bg-white mt-6 px-8  py-8 shadow">
-      <FillUpForm />
+      {/* {formValidation.isFillUpFormValid ? <Snapshot /> : <FillUpForm />} */}
+
+      {formValidation.isSnapshotFormValid ? (
+        <ReviewForm />
+      ) : formValidation.isFillUpFormValid ? (
+        <Snapshot />
+      ) : (
+        <FillUpForm />
+      )}
+      {/* <ReviewForm /> */}
     </div>
   );
 };

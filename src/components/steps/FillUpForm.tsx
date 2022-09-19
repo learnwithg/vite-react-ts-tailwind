@@ -1,16 +1,21 @@
 import React, { useEffect, useState, Fragment } from "react";
-import ComboBox from "../../ui/ComboBox";
+
 import Button from "../../ui/Button";
-import { Select } from "../../ui/Select";
 
 import { useDispatch } from "react-redux";
-import { formActions } from "../../app/store/formSlice";
+import { stepperAction } from "../../app/store/stepperSlice";
+
+import {
+  formActions,
+  formValidateActions,
+  formSlice,
+} from "../../app/store/formSlice";
+
 import { useAppSelector } from "../../app/store/store";
 
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useFormState } from "react-hook-form";
 
 import { Combobox } from "@headlessui/react";
-import { Listbox, Transition } from "@headlessui/react";
 import { ChevronDownIcon, CheckIcon } from "@heroicons/react/solid";
 
 export const companies = [
@@ -41,7 +46,10 @@ type IFormInput = {
   email: string;
   companyToVisit: string;
   personToVisit: string;
+  personToVisitName: string;
+  reasonToVisit: string;
   register: any;
+  isInputNameShown: boolean;
 };
 
 type DataState = {
@@ -56,19 +64,35 @@ const companiesPopulate = companies.map((data) => (
 ));
 
 const FillUpForm: React.FC = () => {
-  const inputName = useAppSelector((state) => state.formState.isInputName);
-  const formData = useAppSelector((state) => state.formState.formInputData);
+  // const inputName = useAppSelector((state) => state.formState.isInputName);
+  // const formData = useAppSelector((state) => state.formState.formData);
   const [query, setQuery] = useState<string>("");
   const [selected, setSelected] = useState<DataState>(person[0]);
+  const [isInputNameShown, setIsInputNameShown] = useState<boolean>(false);
+  const [isRequired, setIsRequired] = useState<boolean>(false);
 
   const {
     control,
     handleSubmit,
     register,
-    formState: { errors },
-  } = useForm<IFormInput>();
+    getFieldState,
+    watch,
+    formState: { errors, isValid, dirtyFields },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      personToVisit: "",
+    },
+  });
 
-  const onSubmit = (values: any) => console.log(values);
+  const fieldState = getFieldState("firstName");
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (values: any) => {
+    console.log(values);
+    dispatch(formActions.fillUpForm(values));
+    dispatch(formValidateActions.validateFillUpForm());
+  };
 
   // const dispatch = useDispatch();
 
@@ -101,10 +125,28 @@ const FillUpForm: React.FC = () => {
   // const personToVisitNameHandler = (event: any) => {
   //   dispatch(formActions.inputPersonToVisitName(event.target.value.trim()));
   // };
+  const watchPersonToVisit = watch("personToVisit");
+
+  const watchAllFields = watch();
+
+  useEffect(() => {
+    const { name } = watchPersonToVisit;
+    if (name === "Cannot find name?") {
+      setIsInputNameShown(true);
+      setIsRequired(true);
+    } else if (name !== "Cannot find name?") {
+      setIsInputNameShown(false);
+      setIsRequired(false);
+    }
+  }, [watchPersonToVisit]);
+
+  useEffect(() => {
+    console.log(fieldState);
+  });
 
   const errorHelper = (
     <p className="mt-2 text-helper text-danger" id="email-description">
-      We'll only use this for spam.
+      This field is required
     </p>
   );
 
@@ -131,6 +173,7 @@ const FillUpForm: React.FC = () => {
               maxLength: 99,
             })}
           />
+          {errors.firstName?.type === "required" && errorHelper}
         </div>
         <div className="w-1/2">
           <label className="block text-leading font-bold text-gray-900">
@@ -145,6 +188,7 @@ const FillUpForm: React.FC = () => {
               maxLength: 99,
             })}
           />
+          {errors.lastName?.type === "required" && errorHelper}
         </div>
       </div>
       <div className="w-full">
@@ -166,269 +210,259 @@ const FillUpForm: React.FC = () => {
             },
           })}
         />
-        {errors.email && errors.email.message}
+        {errors.email?.type === "required" && errorHelper}
       </div>
 
-      {/* <label
-          htmlFor="email"
-          className="block text-leading font-bold text-gray-900"
-        >
-          Company to visit
-        </label>
-        <select className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-          {companiesPopulate}
-        </select> */}
-      {/* 
-      <Select
-        dataArray={companies}
-        label="Company to visit"
-        {...register("companyToVisit")}
-      />
-
-      <Select
-        dataArray={person}
-        label="Person to visit"
-        {...register("personToVisit")}
-      /> */}
-
-      <Controller
-        control={control}
-        name="personToVisit"
-        render={({ field: { value, onChange } }) => (
-          <Combobox as="div" value={value} onChange={onChange}>
-            <Combobox.Label className="block text-leading font-bold text-gray-900">
-              {selected.name}
-            </Combobox.Label>
-            <div className="relative mt-1">
-              <Combobox.Input
-                className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                onChange={(event) => setQuery(event.target.value)}
-                displayValue={(person: { name: string }) => person?.name}
-                autoComplete="off"
-              />
-              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-                <ChevronDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
+      <div className="w-full">
+        <Controller
+          control={control}
+          name="companyToVisit"
+          render={({ field: { value, onChange } }) => (
+            <Combobox as="div" value={value} onChange={onChange}>
+              <Combobox.Label className="block text-leading font-bold text-gray-900">
+                Company to visit
+              </Combobox.Label>
+              <div className="relative mt-1">
+                <Combobox.Input
+                  className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                  onChange={(event) => setQuery(event.target.value)}
+                  displayValue={(person: { name: string }) => person?.name}
+                  autoComplete="off"
                 />
-              </Combobox.Button>
+                <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                  <ChevronDownIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </Combobox.Button>
 
-              {person.length > 0 && (
-                <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {person.map((person) => (
-                    <Combobox.Option
-                      key={person.id}
-                      value={person}
-                      className={({ active }) =>
-                        classNames(
-                          "relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-gray-100",
-                          active ? "bg-pressed text-pumpkin " : "text-gray-900"
-                        )
-                      }
-                    >
-                      {({ active, selected }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              "block truncate",
-                              selected && "font-semibold"
-                            )}
-                          >
-                            {person.name}
-                          </span>
-
-                          {selected && (
+                {companies.length > 0 && (
+                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {companies.map((person) => (
+                      <Combobox.Option
+                        key={person.id}
+                        value={person}
+                        className={({ active }) =>
+                          classNames(
+                            "relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-gray-100",
+                            active
+                              ? "bg-pressed text-pumpkin "
+                              : "text-gray-900"
+                          )
+                        }
+                      >
+                        {({ active, selected }) => (
+                          <>
                             <span
                               className={classNames(
-                                "absolute inset-y-0 right-0 flex items-center pr-4",
-                                active ? "text-pumpkin" : "text-indigo-600"
+                                "block truncate",
+                                selected && "font-semibold"
                               )}
                             >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
+                              {person.name}
                             </span>
-                          )}
-                        </>
-                      )}
-                    </Combobox.Option>
-                  ))}
-                </Combobox.Options>
-              )}
-            </div>
-          </Combobox>
-        )}
-      />
 
-      <Controller
-        control={control}
-        name="companyToVisit"
-        render={({ field: { value, onChange } }) => (
-          <Combobox as="div" value={value} onChange={onChange}>
-            <Combobox.Label className="block text-leading font-bold text-gray-900">
-              {selected.name}
-            </Combobox.Label>
-            <div className="relative mt-1">
-              <Combobox.Input
-                className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                onChange={(event) => setQuery(event.target.value)}
-                displayValue={(person: { name: string }) => person?.name}
-                autoComplete="off"
-              />
-              <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-                <ChevronDownIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </Combobox.Button>
-
-              {companies.length > 0 && (
-                <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {companies.map((data) => (
-                    <Combobox.Option
-                      key={data.id}
-                      value={data}
-                      className={({ active }) =>
-                        classNames(
-                          "relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-gray-100",
-                          active ? "bg-pressed text-pumpkin " : "text-gray-900"
-                        )
-                      }
-                    >
-                      {({ active, selected }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              "block truncate",
-                              selected && "font-semibold"
+                            {selected && (
+                              <span
+                                className={classNames(
+                                  "absolute inset-y-0 right-0 flex items-center pr-4",
+                                  active ? "text-pumpkin" : "text-indigo-600"
+                                )}
+                              >
+                                <CheckIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
                             )}
-                          >
-                            {data.name}
-                          </span>
+                          </>
+                        )}
+                      </Combobox.Option>
+                    ))}
+                  </Combobox.Options>
+                )}
+              </div>
+            </Combobox>
+          )}
+          rules={{ required: true }}
+        />
+        {errors.companyToVisit?.type === "required" && errorHelper}
+      </div>
 
-                          {selected && (
+      <div className="w-full">
+        <Controller
+          control={control}
+          name="personToVisit"
+          render={({ field: { value, onChange } }) => (
+            <Combobox as="div" value={value} onChange={onChange}>
+              <Combobox.Label className="block text-leading font-bold text-gray-900">
+                Person to visit
+              </Combobox.Label>
+              <div className="relative mt-1">
+                <Combobox.Input
+                  className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                  onChange={(event) => setQuery(event.target.value)}
+                  displayValue={(person: { name: string }) => person?.name}
+                  autoComplete="off"
+                />
+                <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                  <ChevronDownIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </Combobox.Button>
+
+                {person.length > 0 && (
+                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {person.map((data) => (
+                      <Combobox.Option
+                        key={data.id}
+                        value={data}
+                        className={({ active }) =>
+                          classNames(
+                            "relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-gray-100",
+                            active
+                              ? "bg-pressed text-pumpkin "
+                              : "text-gray-900"
+                          )
+                        }
+                      >
+                        {({ active, selected }) => (
+                          <>
                             <span
                               className={classNames(
-                                "absolute inset-y-0 right-0 flex items-center pr-4",
-                                active ? "text-pumpkin" : "text-indigo-600"
+                                "block truncate",
+                                selected && "font-semibold"
                               )}
                             >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
+                              {data.name}
                             </span>
-                          )}
-                        </>
-                      )}
-                    </Combobox.Option>
-                  ))}
-                </Combobox.Options>
-              )}
-            </div>
-          </Combobox>
-        )}
-      />
+
+                            {selected && (
+                              <span
+                                className={classNames(
+                                  "absolute inset-y-0 right-0 flex items-center pr-4",
+                                  active ? "text-pumpkin" : "text-indigo-600"
+                                )}
+                              >
+                                <CheckIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </Combobox.Option>
+                    ))}
+                  </Combobox.Options>
+                )}
+              </div>
+            </Combobox>
+          )}
+          rules={{ required: true }}
+        />
+        {errors.personToVisit?.type === "required" && errorHelper}
+      </div>
+
+      {isInputNameShown && (
+        <div className="w-full">
+          <label className="block text-leading font-bold text-gray-900">
+            Person to visit name
+          </label>
+          <input
+            type="text"
+            className="block w-full p-3 rounded border text-gray-800 border-gray-400 text-xs focus:bg-white "
+            {...register("personToVisitName", {
+              required: isRequired,
+              minLength: 2,
+              maxLength: 99,
+            })}
+          />
+          {errors.personToVisitName?.type === "required" && errorHelper}
+        </div>
+      )}
+
+      <div className="w-full">
+        {" "}
+        <Controller
+          control={control}
+          name="reasonToVisit"
+          render={({ field: { value, onChange } }) => (
+            <Combobox as="div" value={value} onChange={onChange}>
+              <Combobox.Label className="block text-leading font-bold text-gray-900">
+                Reason to visit
+              </Combobox.Label>
+              <div className="relative mt-1">
+                <Combobox.Input
+                  className="w-full rounded border border-gray-400 p-3  focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                  onChange={(event) => setQuery(event.target.value)}
+                  displayValue={(person: { name: string }) => person?.name}
+                  autoComplete="off"
+                />
+                <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
+                  <ChevronDownIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </Combobox.Button>
+
+                {reasonToVisit.length > 0 && (
+                  <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    {reasonToVisit.map((data) => (
+                      <Combobox.Option
+                        key={data.id}
+                        value={data}
+                        className={({ active }) =>
+                          classNames(
+                            "relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-gray-100",
+                            active
+                              ? "bg-pressed text-pumpkin "
+                              : "text-gray-900"
+                          )
+                        }
+                      >
+                        {({ active, selected }) => (
+                          <>
+                            <span
+                              className={classNames(
+                                "block truncate",
+                                selected && "font-semibold"
+                              )}
+                            >
+                              {data.name}
+                            </span>
+
+                            {selected && (
+                              <span
+                                className={classNames(
+                                  "absolute inset-y-0 right-0 flex items-center pr-4",
+                                  active ? "text-pumpkin" : "text-indigo-600"
+                                )}
+                              >
+                                <CheckIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </Combobox.Option>
+                    ))}
+                  </Combobox.Options>
+                )}
+              </div>
+            </Combobox>
+          )}
+          rules={{ required: true }}
+        />
+        {errors.reasonToVisit?.type === "required" && errorHelper}
+      </div>
 
       <Button labelName="Next" />
     </form>
   );
-  // <form
-  //   onSubmit={formSubmitHandler}
-  //   className="font-Karla flex flex-col gap-4"
-  // >
-  //   <div className="flex w-full  gap-6">
-  //     <div className="w-1/2">
-  //       <label
-  //         htmlFor="firstname"
-  //         className="block text-leading font-bold text-gray-900"
-  //       >
-  //         Firstname
-  //       </label>
-  //       <div className="mt-1">
-  //         <input
-  //           type="text"
-  //           name="firstname"
-  //           id="firstname"
-  //           onChange={firstnameChangeHandler}
-  //           className="block w-full p-3 rounded border text-gray-800 border-gray-400 text-xs focus:bg-white "
-  //           placeholder="Enter firstname here"
-  //           aria-describedby="firstname-description"
-  //           autoComplete="off"
-  //         />
-  //       </div>
-  //       {/* <p className="mt-2 text-helper text-danger" id="email-description">
-  //         We'll only use this for spam.
-  //       </p> */}
-  //     </div>
-  //     <div className="w-1/2">
-  //       <label
-  //         htmlFor="firstname"
-  //         className="block text-leading font-bold text-gray-900"
-  //       >
-  //         Lastname
-  //       </label>
-  //       <div className="mt-1">
-  //         <input
-  //           type="text"
-  //           name="lastname"
-  //           id="lastname"
-  //           onChange={lastnameChangeHandler}
-  //           className="block w-full p-3 rounded border text-gray-800 border-gray-400 text-xs"
-  //           placeholder="Enter lastname here"
-  //           aria-describedby="lastname-description"
-  //           autoComplete="off"
-  //         />
-  //       </div>
-  //     </div>
-  //   </div>
-  //   <div className="w-full">
-  //     <label
-  //       htmlFor="firstname"
-  //       className="block text-leading font-bold text-gray-900"
-  //     >
-  //       Email Address
-  //     </label>
-  //     <div className="mt-1">
-  //       <input
-  //         type="email"
-  //         name="email"
-  //         id="email"
-  //         onChange={emailChangeHandler}
-  //         className="block w-full p-3 rounded border text-gray-800 border-gray-400 text-xs"
-  //         placeholder="you@kmc.solutions"
-  //         aria-describedby="email-description"
-  //         autoComplete="off"
-  //       />
-  //     </div>
-  //   </div>
-  //   <ComboBox dataArray={companies} label={"Company to visit"} />
-  //   <ComboBox dataArray={person} label={"Person to visit"} />
-  //   {inputName && (
-  //     <div className="w-full">
-  //       <label
-  //         htmlFor="firstname"
-  //         className="block text-leading font-bold text-gray-900"
-  //       >
-  //         Input person's name to visit
-  //       </label>
-  //       <div className="mt-1">
-  //         <input
-  //           type="text"
-  //           name="name"
-  //           id="name"
-  //           onChange={personToVisitNameHandler}
-  //           className="block w-full p-3 rounded border text-gray-800 border-gray-400 text-xs"
-  //           placeholder="Enter name here"
-  //           aria-describedby="name-description"
-  //         />
-  //       </div>
-  //     </div>
-  //   )}
-  //   <ComboBox dataArray={reasonToVisit} label={"Reason to visit"} />
-  //   <Button labelName="Next" />
-  // </form>
 };
 
 export default FillUpForm;

@@ -1,15 +1,16 @@
-import counterReducer from "#rtkfeatures/counter/counter-slice";
 import { apiSlice } from "#rtkfeatures/dogs/dogs-api-slice";
 import { configureStore } from "@reduxjs/toolkit";
 
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
-import { formSlice } from "./formSlice";
+import { formSlice, formsValidationSlice } from "./formSlice";
+import { stepperSlice } from "./stepperSlice";
 
 export const store = configureStore({
   reducer: {
     formState: formSlice.reducer,
-    counter: counterReducer,
+    formsValidation: formsValidationSlice.reducer,
+    stepperState: stepperSlice.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
