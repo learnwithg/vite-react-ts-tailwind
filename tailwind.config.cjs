@@ -15,6 +15,28 @@ module.exports = {
         xs: ['12px', , '18px'],
         tiny: ['10px', , '16px']
       },
+      boxShadow: {
+        'sm-1': '0px 0px 2px rgba(14, 31, 53, 0.12)',
+        'sm-2': '0px 2px 4px rgba(14, 31, 53, 0.12)',
+        'sm-3': '0px 3px 7px rgba(14, 31, 53, 0.12)',
+        'sm-4': '0px 4px 8px rgba(14, 31, 53, 0.16)',
+        'md-1':
+          '0px 2px 4px rgba(14, 31, 53, 0.06), 0px 6px 12px rgba(14, 31, 53, 0.08), 0px 12px 20px rgba(14, 31, 53, 0.06)',
+        'md-2':
+          '0px 3px 6px rgba(14, 31, 53, 0.08), 0px 6px 12px rgba(14, 31, 53, 0.12), 0px 14px 24px rgba(14, 31, 53, 0.08)',
+        'md-3':
+          '0px 4px 8px rgba(14, 31, 53, 0.1), 0px 8px 16px rgba(14, 31, 53, 0.16), 0px 16px 28px -1px rgba(14, 31, 53, 0.1)',
+        'md-4':
+          '0px 6px 10px rgba(14, 31, 53, 0.12), 0px 12px 18px rgba(14, 31, 53, 0.2), 0px 20px 40px -1px rgba(14, 31, 53, 0.12)',
+        'lg-1':
+          '0px 5px 10px rgba(14, 31, 53, 0.06), 0px 10px 20px rgba(14, 31, 53, 0.12), 0px 16px 24px -1px rgba(14, 31, 53, 0.12), 0px 20px 38px -2px rgba(14, 31, 53, 0.06)',
+        'lg-2':
+          '0px 5px 10px rgba(14, 31, 53, 0.08), 0px 10px 20px rgba(14, 31, 53, 0.16), 0px 24px 32px -1px rgba(14, 31, 53, 0.16), 0px 32px 64px -2px rgba(14, 31, 53, 0.08)',
+        'lg-3':
+          '0px 5px 10px -1px rgba(14, 31, 53, 0.06), 0px 10px 20px -2px rgba(14, 31, 53, 0.1), 0px 16px 32px -3px rgba(14, 31, 53, 0.12), 0px 32px 64px -4px rgba(14, 31, 53, 0.14), 0px 40px 72px -5px rgba(14, 31, 53, 0.24)',
+        'lg-4':
+          '0px 5px 10px -1px rgba(14, 31, 53, 0.06), 0px 10px 20px -2px rgba(14, 31, 53, 0.1), 0px 16px 32px -3px rgba(14, 31, 53, 0.12), 0px 32px 64px -4px rgba(14, 31, 53, 0.14), 0px 56px 84px -5px rgba(14, 31, 53, 0.32)'
+      },
       colors: {
         'branding-navy': '#001738',
         'branding-white': '#FFFFFF',
@@ -79,5 +101,5 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [require('@tailwindcss/forms')]
 }
