@@ -17,13 +17,18 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "1.11.0",
+    "@headlessui/react": "^1.7.2",
+    "@heroicons/react": "^2.0.11",
+    "@hookform/resolvers": "^2.9.8",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "redux-persist": "^6.0.0",
-    "vite-plugin-css-injected-by-js": "^2.1.0"
+    "vite-plugin-css-injected-by-js": "^2.1.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "7.19.1",
@@ -39,6 +44,8 @@
     "@storybook/react": "6.5.12",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "6.5.12",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/react-hooks": "^8.0.1",
