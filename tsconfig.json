@@ -20,7 +20,8 @@
       "#rtkstore/*": ["src/app/store/*"],
       "#rtkhooks/*": ["src/app/hooks/*"],
       "#rtkfeatures/*": ["src/app/features/*"],
-      "#utils/*": ["src/utils/*"]
+      "#utils/*": ["src/utils/*"],
+      "#components/*": ["src/components/*"]
     }
   },
   "include": ["src"],
