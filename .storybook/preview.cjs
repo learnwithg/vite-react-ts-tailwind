@@ -7,6 +7,7 @@ export const parameters = {
       ...MINIMAL_VIEWPORTS
     }
   },
+
   layout: 'centered',
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {

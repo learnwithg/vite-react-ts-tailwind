@@ -29,6 +29,7 @@
     "react-router-dom": "6.3.0",
     "redux-persist": "^6.0.0",
     "vite-plugin-css-injected-by-js": "^2.1.0",
+    "vite-tsconfig-paths": "^3.5.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

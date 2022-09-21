@@ -7,6 +7,7 @@ const Home = () => {
       <div className="flex gap-4">
         <Button>Filled Primary</Button>
         <Button variant="filled-secondary">Filled Secondary</Button>
+        <Button variant="filled-success">Filled Success</Button>
         <Button variant="filled-warning">Filled Success</Button>
         <Button variant="filled-danger">Filled Success</Button>
         <Button variant="filled-info">Filled Success</Button>
@@ -17,6 +18,9 @@ const Home = () => {
         <Button size="sm">Filled Primary</Button>
         <Button size="sm" variant="filled-secondary">
           Filled Secondary
+        </Button>
+        <Button size="sm" variant="filled-success">
+          Filled Success
         </Button>
         <Button size="sm" variant="filled-warning">
           Filled Success
@@ -31,29 +35,30 @@ const Home = () => {
 
       <p>OUTLINED | base</p>
       <div className="flex gap-4">
-        <Button variant="outlined-primary">Filled Primary</Button>
-        <Button variant="outlined-secondary">Filled Secondary</Button>
-        <Button variant="outlined-warning">Filled Success</Button>
-        <Button variant="outlined-danger">Filled Success</Button>
-        <Button variant="outlined-info">Filled Success</Button>
+        <Button variant="outlined-primary">Outlined Primary</Button>
+        <Button variant="outlined-secondary">Outlined Secondary</Button>
+        <Button variant="outlined-success">Outlined Success</Button>
+        <Button variant="outlined-warning">Outlined Success</Button>
+        <Button variant="outlined-danger">Outlined Success</Button>
+        <Button variant="outlined-info">Outlined Success</Button>
       </div>
 
       <p>OUTLINED | sm</p>
       <div className="flex gap-4">
         <Button size="sm" variant="outlined-primary">
-          Filled Primary
+          Outlined Primary
         </Button>
         <Button size="sm" variant="outlined-secondary">
-          Filled Secondary
+          Outlined Secondary
         </Button>
         <Button size="sm" variant="outlined-warning">
-          Filled Success
+          Outlined Success
         </Button>
         <Button size="sm" variant="outlined-danger">
-          Filled Success
+          Outlined Success
         </Button>
         <Button size="sm" variant="outlined-info">
-          Filled Success
+          Outlined Success
         </Button>
       </div>
     </div>

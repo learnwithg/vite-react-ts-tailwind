@@ -20,3 +20,5 @@ test-utils.ts
 setupTests.ts
 
 tailwind.config.cjs
+
+tsconfig.node.json

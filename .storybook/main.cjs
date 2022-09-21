@@ -1,10 +1,11 @@
 const { mergeConfig } = require('vite')
+const { default: tsconfigPaths } = require('vite-tsconfig-paths')
 
 module.exports = {
   async viteFinal(config, { configType }) {
     // return the customized config
     return mergeConfig(config, {
-      // customize the Vite config here
+      plugins: [tsconfigPaths()],
       resolve: {
         alias: { foo: 'bar' }
       }
