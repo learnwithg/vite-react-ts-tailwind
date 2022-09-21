@@ -3,7 +3,6 @@ import appTheme from './appTheme.cjs'
 import React from 'react'
 
 addons.setConfig({
-  panelPosition: 'right',
   theme: appTheme,
   toolbar: {
     title: { hidden: false },
