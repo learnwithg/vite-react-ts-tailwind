@@ -14,8 +14,7 @@
     "deploy-storybook": "gh-pages -d storybook-static",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --passWithNoTests --watch",
-    "lint-staged": "lint-staged --config lint-staged.cjs",
-    "chromatic": "npx chromatic --project-token=19d90db1c4a9"
+    "lint-staged": "lint-staged --config lint-staged.cjs"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.11.0",
