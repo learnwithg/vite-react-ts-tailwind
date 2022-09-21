@@ -11,9 +11,11 @@
     "lint:styles": "stylelint \"src/**/*.css\" --allow-empty-input",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --passWithNoTests --watch",
-    "lint-staged": "lint-staged --config lint-staged.cjs"
+    "lint-staged": "lint-staged --config lint-staged.cjs",
+    "chromatic": "npx chromatic --project-token=19d90db1c4a9"
   },
   "dependencies": {
     "@auth0/auth0-react": "1.11.0",
@@ -87,5 +89,7 @@
     "vite": "3.1.1",
     "vite-plugin-windicss": "^1.8.8",
     "vitest": "^0.23.2"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "ERP-2022@0.0.0"
 }
