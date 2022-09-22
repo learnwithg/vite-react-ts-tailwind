@@ -1,9 +1,9 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import { Toggle } from '#components/core'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 export default {
   title: 'Core/Toggle',
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   component: Toggle,
   argTypes: {}
 } as ComponentMeta<typeof Toggle>

@@ -6,19 +6,24 @@ import { classNames } from '#utils/classNames'
 import { FCC } from '#utils/FCC'
 
 interface SwitchProps {
-  onChangeValue: () => void
+  onChangeValue?: (e: boolean) => void
   size?: 'sm' | 'base'
+  enabled?: boolean
 }
 
-export const Toggle: FCC<SwitchProps> = ({ size = 'base', onChangeValue }) => {
-  const [enabled, setEnabled] = useState<boolean>(false)
+export const Toggle: FCC<SwitchProps> = ({
+  size = 'base',
+  onChangeValue,
+  enabled
+}) => {
+  const [enabledBase, setEnabledBase] = useState<boolean>(enabled ?? false)
 
   return (
     <Switch
-      checked={enabled}
+      checked={enabledBase}
       onChange={() => {
-        onChangeValue()
-        setEnabled((prevState) => !prevState)
+        onChangeValue && onChangeValue(!enabled)
+        setEnabledBase((prevState) => !prevState)
       }}
       className={classNames(
         enabled ? 'bg-branding-pumpkin' : 'bg-gray-200 ',
