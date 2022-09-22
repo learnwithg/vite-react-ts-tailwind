@@ -12,7 +12,7 @@ interface SwitchProps {
 }
 
 export const Toggle: FCC<SwitchProps> = ({
-  size = 'sm',
+  size = 'base',
   onChangeValue,
   enabled
 }) => {
