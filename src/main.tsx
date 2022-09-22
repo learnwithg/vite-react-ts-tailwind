@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { store } from '#rtkstore/store'
 import { Auth0Provider } from '@auth0/auth0-react'
 import React from 'react'
