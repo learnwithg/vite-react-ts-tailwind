@@ -1,4 +1,5 @@
 import { Button } from '#components/core'
+import { Toggle } from '#components/core'
 
 const Home = () => {
   return (
@@ -60,6 +61,22 @@ const Home = () => {
         <Button size="sm" variant="outlined-info">
           Outlined Success
         </Button>
+      </div>
+
+      <p>SWITCH | base</p>
+      <div className="mb-2">
+        <Toggle
+          size="base"
+          onChangeValue={() => console.log('Base switch toggled')}
+        />
+      </div>
+
+      <p>SWITCH | sm</p>
+      <div className="mb-2">
+        <Toggle
+          size="sm"
+          onChangeValue={() => console.log('Small switch toggled')}
+        />
       </div>
     </div>
   )
