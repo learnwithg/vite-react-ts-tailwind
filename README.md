@@ -54,10 +54,10 @@ _This will push your commits to remote repository_
 _Pulling other contributor changes in same feature_
 
 ```bash
-git flow feature pull {featureName}
+git flow feature tracl {featureName}
 ```
 
-_This will pull other collaborators changes to your local repository_
+_This will create a local tracking branch from other collaborators_
 
 <br>
 
@@ -98,7 +98,7 @@ _This will create a new branch from `main` called `hotfix/{hotfixName}`._
 Action for finished `feature`, `bugfix` and `hotfix`.
 
 ```bash
-git flow pubish {feature/hotfix/bugfix} {name}
+git flow {feature/hotfix/bugfix} pubish {name}
 ```
 
 _This action will push your current local branch to remote repo and will be available for PR._
