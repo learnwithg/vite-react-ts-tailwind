@@ -1,72 +1,40 @@
-import { Button } from '#components/core'
 import SplitButton from '#components/core/SplitButton'
-import { 
-  CloudArrowDownIcon, 
-  CloudArrowUpIcon, 
+import {
+  CloudArrowDownIcon,
+  CloudArrowUpIcon,
   PencilIcon,
   TrashIcon
 } from '@heroicons/react/24/solid'
 
+import { Input } from '#components/core'
+import { Toggle } from '#components/core'
+import { useState } from 'react'
+
 const Home = () => {
+  const [enabled, setEnabled] = useState(true)
+
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
-      <p>FILLED | base</p>
-      <div className="flex gap-4">
-        <Button>Filled Primary</Button>
-        <Button variant="filled-secondary">Filled Secondary</Button>
-        <Button variant="filled-success">Filled Success</Button>
-        <Button variant="filled-warning">Filled Success</Button>
-        <Button variant="filled-danger">Filled Success</Button>
-        <Button variant="filled-info">Filled Success</Button>
+      <p>SWITCH | base</p>
+      <div className="mb-2">
+        <Toggle enabled={enabled} size="base" onChangeValue={setEnabled} />
       </div>
 
-      <p>FILLED | sm</p>
-      <div className="flex gap-4">
-        <Button size="sm">Filled Primary</Button>
-        <Button size="sm" variant="filled-secondary">
-          Filled Secondary
-        </Button>
-        <Button size="sm" variant="filled-success">
-          Filled Success
-        </Button>
-        <Button size="sm" variant="filled-warning">
-          Filled Success
-        </Button>
-        <Button size="sm" variant="filled-danger">
-          Filled Success
-        </Button>
-        <Button size="sm" variant="filled-info">
-          Filled Success
-        </Button>
+      <p>SWITCH | sm</p>
+      <div className="mb-2">
+        <Toggle
+          size="sm"
+          onChangeValue={() => console.log('Small switch toggled')}
+        />
       </div>
 
-      <p>OUTLINED | base</p>
-      <div className="flex gap-4">
-        <Button variant="outlined-primary">Outlined Primary</Button>
-        <Button variant="outlined-secondary">Outlined Secondary</Button>
-        <Button variant="outlined-success">Outlined Success</Button>
-        <Button variant="outlined-warning">Outlined Success</Button>
-        <Button variant="outlined-danger">Outlined Success</Button>
-        <Button variant="outlined-info">Outlined Success</Button>
-      </div>
-
-      <p>OUTLINED | sm</p>
-      <div className="flex gap-4">
-        <Button size="sm" variant="outlined-primary">
-          Outlined Primary
-        </Button>
-        <Button size="sm" variant="outlined-secondary">
-          Outlined Secondary
-        </Button>
-        <Button size="sm" variant="outlined-warning">
-          Outlined Success
-        </Button>
-        <Button size="sm" variant="outlined-danger">
-          Outlined Success
-        </Button>
-        <Button size="sm" variant="outlined-info">
-          Outlined Success
-        </Button>
+      <p>INPUT</p>
+      <div className="mb-2">
+        <Input
+          error="asdadas"
+          label="Email Address"
+          onChange={() => console.log('Small switch toggled')}
+        />
       </div>
 
       <p>--------------------------------</p>
@@ -77,19 +45,19 @@ const Home = () => {
         <SplitButton size="sm" text="Filled Primary">
           <SplitButton.Section sectionTitle="File Options">
             <SplitButton.Action text="Import File">
-              <CloudArrowDownIcon className="h-6 w-6"/>
+              <CloudArrowDownIcon className="h-6 w-6" />
             </SplitButton.Action>
             <SplitButton.Action text="Upload File">
-              <CloudArrowUpIcon className="h-6 w-6"/>
+              <CloudArrowUpIcon className="h-6 w-6" />
             </SplitButton.Action>
           </SplitButton.Section>
 
           <SplitButton.Section sectionTitle="Bulk Options">
             <SplitButton.Action text="Edit" variant="success">
-              <PencilIcon className="h-6 w-6"/>
+              <PencilIcon className="h-6 w-6" />
             </SplitButton.Action>
             <SplitButton.Action text="Delete" variant="danger">
-              <TrashIcon className="h-6 w-6"/>
+              <TrashIcon className="h-6 w-6" />
             </SplitButton.Action>
           </SplitButton.Section>
         </SplitButton>
@@ -97,12 +65,26 @@ const Home = () => {
 
       <p>OUTLINED | base</p>
       <div className="flex gap-4">
-        <SplitButton text="Outlined Primary" variant="outlined-primary" size="sm">
-          <SplitButton.Action onClick={() => {console.log('pinindot')}} text="Import File">
-            <CloudArrowDownIcon className="h-6 w-6 mr-2"/>
+        <SplitButton
+          text="Outlined Primary"
+          variant="outlined-primary"
+          size="sm"
+        >
+          <SplitButton.Action
+            onClick={() => {
+              console.log('pinindot')
+            }}
+            text="Import File"
+          >
+            <CloudArrowDownIcon className="h-6 w-6 mr-2" />
           </SplitButton.Action>
-          <SplitButton.Action onClick={() => {console.log('pinindot')}} text="Upload File">
-            <CloudArrowUpIcon className="h-6 w-6 mr-2"/>
+          <SplitButton.Action
+            onClick={() => {
+              console.log('pinindot')
+            }}
+            text="Upload File"
+          >
+            <CloudArrowUpIcon className="h-6 w-6 mr-2" />
           </SplitButton.Action>
         </SplitButton>
       </div>
