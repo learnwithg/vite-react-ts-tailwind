@@ -6,7 +6,7 @@ import {
   TrashIcon
 } from '@heroicons/react/24/solid'
 
-import { Input } from '#components/core'
+import { Checkbox } from '#components/core'
 import { Toggle } from '#components/core'
 import { useState } from 'react'
 
@@ -28,13 +28,9 @@ const Home = () => {
         />
       </div>
 
-      <p>INPUT</p>
+      <p>Radio</p>
       <div className="mb-2">
-        <Input
-          error="asdadas"
-          label="Email Address"
-          onChange={() => console.log('Small switch toggled')}
-        />
+        <Checkbox label="Label" description="asdasds" name="isCoasdas" />
       </div>
 
       <p>--------------------------------</p>
