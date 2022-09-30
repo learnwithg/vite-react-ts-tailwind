@@ -54,10 +54,30 @@ _This will push your commits to remote repository_
 _Pulling other contributor changes in same feature_
 
 ```bash
-git flow feature tracl {featureName}
+git flow feature track {featureName}
 ```
 
 _This will create a local tracking branch from other collaborators_
+
+##### Creating a PR.
+
+_Use this format for any PR made in `develop` and `main`_
+
+```bash
+This pull request contains:
+
+- [x] New Feature
+- [x] Component Updates
+- [x] Bug Fix
+- [ ] Code Refactor
+- [x] Storybook Updates
+- [ ] Other (about what?)
+
+`Enter your PR message here`
+
+```
+
+_Check all necessary items that descrivbes your PR and add you PR message below_
 
 <br>
 
