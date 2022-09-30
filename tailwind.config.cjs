@@ -51,7 +51,7 @@ module.exports = {
         'main-success': '#008060',
         'main-warning': '#916A00',
         'main-danger': '#D72C0D',
-        'main-information': '#2C6ECB',
+        'main-info': '#2C6ECB',
         'main-accent': '#FF7200',
         'main-white': '#FFFFFF',
         'surface-primary-neutral': '#FFF4EB',

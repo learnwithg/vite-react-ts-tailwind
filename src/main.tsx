@@ -9,6 +9,7 @@ import persistStore from 'redux-persist/es/persistStore'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
+import { Toaster } from 'react-hot-toast'
 
 const persistor = persistStore(store)
 const root = ReactDOM.createRoot(document.getElementById('root')!)
@@ -23,6 +24,8 @@ const Main = () => {
       >
         <Provider store={store}>
           <PersistGate persistor={persistor}>
+            <Toaster position="top-right" />
+
             <BrowserRouter>
               <App />
             </BrowserRouter>

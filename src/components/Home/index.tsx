@@ -6,9 +6,10 @@ import {
   TrashIcon
 } from '@heroicons/react/24/solid'
 
-import { Button, Checkbox, Toggle } from '#components/core'
+import { Button, Checkbox } from '#components/core'
 import Dialog from '#components/core/Dialog'
 import { useState } from 'react'
+import { Toggle } from '#components/core/Switch'
 
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
