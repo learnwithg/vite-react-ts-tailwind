@@ -6,27 +6,67 @@ import {
   TrashIcon
 } from '@heroicons/react/24/solid'
 
-import { Checkbox } from '#components/core'
+import { Button, Checkbox } from '#components/core'
 import { Toggle } from '#components/core'
 import { useState } from 'react'
+import { showToast } from '#components/core/Toast'
 
 const Home = () => {
   const [enabled, setEnabled] = useState(true)
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
+    <div className="h-screen w-screen flex items-center justify-center flex-col gap-6 my-10">
+      <div className=" gap-2 flex">
+        <Button
+          onClick={() => {
+            showToast({ message: 'This is a success toast!' })
+          }}
+        >
+          Success
+        </Button>
+        <Button
+          onClick={() => {
+            showToast({ message: 'This is a info toast!', variant: 'info' })
+          }}
+        >
+          Info
+        </Button>
+        <Button
+          onClick={() => {
+            showToast({
+              message: 'This is a danger toast!',
+              variant: 'danger'
+            })
+          }}
+        >
+          Danger
+        </Button>
+        <Button
+          onClick={() => {
+            showToast({
+              message: 'This is a warning toast!',
+              variant: 'warning'
+            })
+          }}
+        >
+          Warning
+        </Button>
+      </div>
+
       <p>SWITCH | base</p>
       <div className="mb-2">
-        <Toggle enabled={enabled} size="base" onChangeValue={setEnabled} />
+        <Toggle
+          enabled={enabled}
+          size="base"
+          onChangeValue={(e) => {
+            setEnabled(e)
+            showToast({ message: 'Successasdasdad asmlkfnaslf' })
+          }}
+        />
       </div>
 
       <p>SWITCH | sm</p>
-      <div className="mb-2">
-        <Toggle
-          size="sm"
-          onChangeValue={() => console.log('Small switch toggled')}
-        />
-      </div>
+      <div className="mb-2"></div>
 
       <p>Radio</p>
       <div className="mb-2">
