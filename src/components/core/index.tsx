@@ -1,5 +1,6 @@
 export { Button } from './Button'
-export { Toggle } from './Switch'
+export { default as Checkbox } from './Checkbox'
+export { default as Dialog } from './Dialog'
 export { default as Input } from './Input'
 export { default as Radio } from './Radio'
-export { default as Checkbox } from './Checkbox'
+export { Toggle } from './Switch'
