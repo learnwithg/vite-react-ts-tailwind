@@ -8,23 +8,21 @@ import {
 
 import { Button, Checkbox, Toggle } from '#components/core'
 import Dialog from '#components/core/Dialog'
+import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
 
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
-  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false)
+  const [dialogIsOpen, closeDialog, setOpenDialog] = useDialogState()
   const [dialogWidth, setDialogWidth] = useState<
     'sm' | 'md' | 'lg' | 'xl' | 'xxl'
   >('sm')
 
-  const closeDialog = () => {
-    setDialogIsOpen(!dialogIsOpen)
-  }
-
   const openDialog = (width: 'sm' | 'md' | 'lg' | 'xl' | 'xxl') => {
     setDialogWidth(width)
-    setDialogIsOpen(true)
+    setOpenDialog()
   }
+
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
       <div className="w-10/12 flex-col gap-4 flex items-center">
