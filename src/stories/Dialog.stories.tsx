@@ -19,8 +19,12 @@ const Template: ComponentStory<typeof Dialog> = (args) => {
 
   return (
     <>
-      <Button variant="filled-primary" onClick={() => setIsOpen(true)}>
-        {args.width?.toUpperCase()} Dialog
+      <Button
+        variant="filled-primary"
+        size="sm"
+        onClick={() => setIsOpen(true)}
+      >
+        Show Dialog
       </Button>
       <Dialog {...args} open={isOpen}>
         <Dialog.Title title={`${args.width?.toUpperCase() as string} Dialog`} />

@@ -15,7 +15,7 @@ export type ButtonVariant =
   | 'outlined-danger'
   | 'outlined-info'
 
-interface ButtonProps
+export interface ButtonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement

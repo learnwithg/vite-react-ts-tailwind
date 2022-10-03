@@ -7,10 +7,11 @@ import {
 } from '@heroicons/react/24/solid'
 
 import { Button, Checkbox } from '#components/core'
+import AlertDialog, { AlertDialogVariant } from '#components/core/AlertDialog'
 import Dialog from '#components/core/Dialog'
+import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
-import { Toggle } from '#components/core/Switch'
 
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
@@ -22,6 +23,16 @@ const Home = () => {
   const openDialog = (width: 'sm' | 'md' | 'lg' | 'xl' | 'xxl') => {
     setDialogWidth(width)
     setOpenDialog()
+  }
+
+  const [activeAlertDialogVariant, setActiveAlertDialogVariant] =
+    useState<AlertDialogVariant>('confirm')
+  const [alertDialogIsOpen, closeAlertDialog, setOpenAlertDialog] =
+    useDialogState()
+
+  const openAlertDialog = (variant: AlertDialogVariant) => {
+    setActiveAlertDialogVariant(variant)
+    setOpenAlertDialog()
   }
 
   return (
@@ -137,7 +148,7 @@ const Home = () => {
 
         <span className="w-full h-[1px] bg-gray-300" />
 
-        {/* CHECKBOX COMPONENT */}
+        {/* DIALOG COMPONENT */}
         <strong>DIALOG COMPONENT</strong>
         <div className="flex gap-4 mt-4">
           <div className="flex flex-col items-center gap-4">
@@ -189,8 +200,62 @@ const Home = () => {
           </div>
         </div>
         {/* !DIALOG COMPONENT */}
+
+        {/* ALERT DIALOG COMPONENT */}
+        <strong>DIALOG COMPONENT</strong>
+        <div className="flex gap-4 mt-4">
+          <div className="flex flex-col items-center gap-4">
+            <div className="mb-2 h-10 flex items-center">
+              <Button
+                variant="filled-primary"
+                onClick={() => openAlertDialog('confirm')}
+              >
+                Confirm
+              </Button>
+            </div>
+            <p>confirmation</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="mb-2 h-10 flex items-center">
+              <Button
+                variant="filled-info"
+                onClick={() => openAlertDialog('info')}
+              >
+                Info
+              </Button>
+            </div>
+            <p>information</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="mb-2 h-10 flex items-center">
+              <Button
+                variant="filled-warning"
+                onClick={() => openAlertDialog('warning')}
+              >
+                Warning
+              </Button>
+            </div>
+            <p>warning</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="mb-2 h-10 flex items-center">
+              <Button
+                variant="filled-danger"
+                onClick={() => openAlertDialog('danger')}
+              >
+                Danger
+              </Button>
+            </div>
+            <p>danger</p>
+          </div>
+        </div>
+        {/* !ALERT DIALOG COMPONENT */}
       </div>
 
+      {/* DIALOG COMPONENT USAGE */}
       <Dialog open={dialogIsOpen} closeDialog={closeDialog} width={dialogWidth}>
         <Dialog.Title title="Title" />
         <Dialog.Content>
@@ -206,6 +271,19 @@ const Home = () => {
           </Button>
         </Dialog.Footer>
       </Dialog>
+
+      {/* ALERT DIALOG USAGE */}
+
+      <AlertDialog
+        open={alertDialogIsOpen}
+        title="Title"
+        description="If you enjoy our app, would you mind taking a moment to rate it?"
+        onOk={closeAlertDialog}
+        onCancel={closeAlertDialog}
+        variant={activeAlertDialogVariant}
+        cancelButtonText="Go Back"
+        okButtonText="Proceed"
+      />
     </div>
   )
 }
