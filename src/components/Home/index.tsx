@@ -1,4 +1,11 @@
 import { Button } from '#components/core'
+import { ComboBox } from '#components/core'
+
+const optionsList = [
+  { value: 'Option 1', label: 'Option 1' },
+  { value: 'Option 2', label: 'Option 2' },
+  { value: 'option 3', label: 'Option 3' }
+]
 
 const Home = () => {
   return (
@@ -60,6 +67,28 @@ const Home = () => {
         <Button size="sm" variant="outlined-info">
           Outlined Success
         </Button>
+      </div>
+
+      <p>Combobox | Filled</p>
+      <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
+        <ComboBox
+          label="Label"
+          options={optionsList}
+          onChange={(e) => console.log(e?.value)}
+          error="This is an error"
+          variant="filled"
+        />
+      </div>
+
+      <p>Combobox | Outlined</p>
+      <div className=" bg-slate-100 w-full   justify-center px-10 py-2">
+        <ComboBox
+          label="Label"
+          options={optionsList}
+          onChange={(e) => console.log(e?.value)}
+          error="This is an error"
+          variant="outlined"
+        />
       </div>
     </div>
   )
