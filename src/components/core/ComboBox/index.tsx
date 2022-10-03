@@ -3,7 +3,8 @@ import Select, {
   CSSObjectWithLabel,
   GroupBase,
   Props,
-  components
+  components,
+  DropdownIndicatorProps
 } from 'react-select'
 
 import { useState } from 'react'
@@ -15,7 +16,7 @@ export type ComboBoxVariant = 'filled' | 'outlined'
 
 export type OptionDefaultFormat = {
   value: string | number
-  name: string | number
+  label: string | number
   icon?: JSX.Element
 }
 
@@ -48,7 +49,9 @@ export const ComboBox = <
     ...rest
   } = props
 
-  const DropdownIndicator = (props) => {
+  const DropdownIndicator = (
+    props: DropdownIndicatorProps<Option, IsMulti, Group>
+  ) => {
     return (
       components.DropdownIndicator && (
         <components.DropdownIndicator {...props}>
