@@ -9,7 +9,12 @@ export default {
   component: AlertDialog,
   argTypes: {},
   args: {
-    open: false
+    open: false,
+    title: 'Title',
+    description:
+      'If you enjoy our app, would you mind taking a moment to rate it?',
+    cancelButtonText: 'Cancel',
+    okButtonText: 'Continue'
   }
 } as ComponentMeta<typeof AlertDialog>
 
@@ -32,13 +37,13 @@ const Template: ComponentStory<typeof AlertDialog> = (args) => {
 
       <AlertDialog
         open={isOpen}
-        title="Title"
-        description="If you enjoy our app, would you mind taking a moment to rate it?"
+        title={args.title}
+        description={args.description}
         onOk={() => setIsOpen(false)}
         onCancel={() => setIsOpen(false)}
         variant={args.variant}
-        cancelButtonText="Go Back"
-        okButtonText="Proceed"
+        cancelButtonText={args.cancelButtonText}
+        okButtonText={args.okButtonText}
       />
     </>
   )
