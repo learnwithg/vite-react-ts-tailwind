@@ -1,4 +1,8 @@
 import { classNames } from '#utils/classNames'
+import { useState } from 'react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import { selectThemeColors } from './theme'
 import Select, {
   CSSObjectWithLabel,
   GroupBase,
@@ -7,16 +11,12 @@ import Select, {
   DropdownIndicatorProps
 } from 'react-select'
 
-import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { ChevronUpIcon } from '@heroicons/react/20/solid'
-import { selectThemeColors } from './theme'
-
 export type ComboBoxVariant = 'filled' | 'outlined'
 
 export type OptionDefaultFormat = {
   value: string | number
   label: string | number
+  action?: () => void
   icon?: JSX.Element
 }
 
@@ -35,7 +35,7 @@ export const ComboBox = <
     renderValueStyles?: (e: OptionDefaultFormat) => CSSObjectWithLabel
   }
 ) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false) //State manager for changing ArrowIcon
 
   const {
     className,
@@ -105,11 +105,6 @@ export const ComboBox = <
               display: 'none'
             }
           },
-          menuList: (provided) => {
-            return {
-              ...provided
-            }
-          },
           dropdownIndicator: (provided, { isFocused }) => {
             return {
               ...provided,
@@ -128,11 +123,6 @@ export const ComboBox = <
                 color: 'black'
               },
               borderRadius: '0px 4px 4px 0px'
-            }
-          },
-          indicatorsContainer: (provided) => {
-            return {
-              ...provided
             }
           },
           control: (provided, { selectProps }) => {
