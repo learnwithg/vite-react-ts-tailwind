@@ -54,10 +54,30 @@ _This will push your commits to remote repository_
 _Pulling other contributor changes in same feature_
 
 ```bash
-git flow feature pull {featureName}
+git flow feature track {featureName}
 ```
 
-_This will pull other collaborators changes to your local repository_
+_This will create a local tracking branch from other collaborators_
+
+##### Creating a PR.
+
+_Use this format for any PR made in `develop` and `main`_
+
+```bash
+This pull request contains:
+
+- [x] New Feature
+- [x] Component Updates
+- [x] Bug Fix
+- [ ] Code Refactor
+- [x] Storybook Updates
+- [ ] Other (about what?)
+
+`Enter your PR message here`
+
+```
+
+_Check all necessary items that descrivbes your PR and add you PR message below_
 
 <br>
 
@@ -98,7 +118,7 @@ _This will create a new branch from `main` called `hotfix/{hotfixName}`._
 Action for finished `feature`, `bugfix` and `hotfix`.
 
 ```bash
-git flow pubish {feature/hotfix/bugfix} {name}
+git flow {feature/hotfix/bugfix} pubish {name}
 ```
 
 _This action will push your current local branch to remote repo and will be available for PR._

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { store } from '#rtkstore/store'
 import { Auth0Provider } from '@auth0/auth0-react'
 import React from 'react'
@@ -8,6 +9,7 @@ import persistStore from 'redux-persist/es/persistStore'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
+import { Toaster } from 'react-hot-toast'
 
 const persistor = persistStore(store)
 const root = ReactDOM.createRoot(document.getElementById('root')!)
@@ -22,6 +24,8 @@ const Main = () => {
       >
         <Provider store={store}>
           <PersistGate persistor={persistor}>
+            <Toaster position="top-right" />
+
             <BrowserRouter>
               <App />
             </BrowserRouter>
