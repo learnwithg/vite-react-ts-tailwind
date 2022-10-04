@@ -1,3 +1,4 @@
+import Callout from '#components/core/Callout'
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -284,6 +285,19 @@ const Home = () => {
         cancelButtonText="Go Back"
         okButtonText="Proceed"
       />
+
+      <span className="w-full h-[1px] bg-gray-300" />
+
+      {/* CALLOUT COMPONENT */}
+      <strong>CALLOUT COMPONENT</strong>
+
+      <div className="bg-gray-200 w-full flex items-center justify-center p-5">
+        <Callout
+          title="This is a test callout component"
+          info="Upload your store’s logo, change colors and fonts, and more."
+          buttonLabel="Get Now"
+        />
+      </div>
     </div>
   )
 }
