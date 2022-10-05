@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { selectThemeColors } from './theme'
-import Select, {
+import RSSelect, {
   GroupBase,
   Props,
   components,
@@ -19,7 +19,7 @@ export type OptionDefaultFormat = {
   icon?: JSX.Element
 }
 
-const ComboBox = <
+const Select = <
   Option extends OptionDefaultFormat,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option & OptionDefaultFormat> = GroupBase<
@@ -50,7 +50,7 @@ const ComboBox = <
     <div className={classNames(className && className, 'group')}>
       {label && <p className="font-karla text-sm text-gray-800">{label}</p>}
 
-      <Select
+      <RSSelect
         className="font-karla text-sm "
         isSearchable={rest.isSearchable ?? false}
         options={options}
@@ -198,4 +198,4 @@ const DropdownIndicator = <
   )
 }
 
-export default ComboBox
+export default Select

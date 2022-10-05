@@ -1,4 +1,4 @@
-import Select from '#components/core/Select'
+import { Select } from '#components/core'
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
