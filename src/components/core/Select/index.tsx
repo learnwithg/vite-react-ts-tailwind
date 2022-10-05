@@ -1,13 +1,17 @@
 import { classNames } from '#utils/classNames'
 import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  XMarkIcon
+} from '@heroicons/react/20/solid'
 import { selectThemeColors } from './theme'
 import RSSelect, {
   GroupBase,
   Props,
   components,
-  DropdownIndicatorProps
+  DropdownIndicatorProps,
+  ClearIndicatorProps
 } from 'react-select'
 
 export type ComboBoxVariant = 'filled' | 'outlined'
@@ -58,6 +62,9 @@ const Select = <
         components={{
           DropdownIndicator: (indicatorProps) => (
             <DropdownIndicator {...indicatorProps} isMenuOpen={isMenuOpen} />
+          ),
+          ClearIndicator: (indicatorProps) => (
+            <ClearIndicator isMenuOpen={false} {...indicatorProps} />
           )
         }}
         defaultValue={defaultValue}
@@ -113,6 +120,12 @@ const Select = <
               borderRadius: '0px 4px 4px 0px',
               paddingTop: variant === 'filled' ? '11px' : '12px',
               paddingBottom: variant === 'filled' ? '11px' : '12px'
+            }
+          },
+          clearIndicator: (provided) => {
+            return {
+              ...provided,
+              color: '#FF7200'
             }
           },
           control: (provided, { selectProps }) => {
@@ -195,6 +208,30 @@ const DropdownIndicator = <
         <ChevronDownIcon className="w-5" />
       )}
     </components.DropdownIndicator>
+  )
+}
+
+const ClearIndicator = <
+  Option extends OptionDefaultFormat,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option & OptionDefaultFormat> = GroupBase<
+    Option & OptionDefaultFormat
+  >
+>(
+  props: ClearIndicatorProps<Option, IsMulti, Group> & {
+    isMenuOpen: boolean
+  }
+) => {
+  const { isMenuOpen, ...rest } = props
+
+  return (
+    <components.ClearIndicator {...rest}>
+      {isMenuOpen ? (
+        <XMarkIcon className="w-4 text-branding-pumpkin" />
+      ) : (
+        <XMarkIcon className="w-4" />
+      )}
+    </components.ClearIndicator>
   )
 }
 
