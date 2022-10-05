@@ -1,4 +1,4 @@
-import { ComboBox } from '#components/core'
+import Select from '#components/core/Select'
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -271,10 +271,10 @@ const Home = () => {
 
       <p>Combobox | Filled</p>
       <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
-        <ComboBox
+        <Select
           label="Label"
           options={optionsList}
-          onChange={handleChange}
+          onChange={(e) => console.log(e)}
           error="This is an error"
           variant="filled"
         />
@@ -282,7 +282,7 @@ const Home = () => {
 
       <p>Combobox | Outlined</p>
       <div className=" bg-slate-100 w-full   justify-center px-10 py-2">
-        <ComboBox
+        <Select
           isMulti
           label="Label"
           options={optionsList}

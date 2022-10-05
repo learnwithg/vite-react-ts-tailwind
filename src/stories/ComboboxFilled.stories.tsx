@@ -1,16 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import ComboBox from '#components/core/Select'
+import Select from '#components/core/Select'
 
 export default {
   title: 'Core/Combobox/Filled',
-  component: ComboBox,
+  component: Select,
   argTypes: {}
-} as ComponentMeta<typeof ComboBox>
+} as ComponentMeta<typeof Select>
 
-const Template: ComponentStory<typeof ComboBox> = (args) => (
-  <ComboBox {...args} />
-)
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {
