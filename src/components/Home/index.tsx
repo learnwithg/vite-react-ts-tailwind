@@ -6,6 +6,7 @@ import {
   TrashIcon
 } from '@heroicons/react/24/solid'
 
+import { Tabs } from '#components/core'
 import { Button, Checkbox } from '#components/core'
 import AlertDialog, { AlertDialogVariant } from '#components/core/AlertDialog'
 import Dialog from '#components/core/Dialog'
@@ -37,9 +38,15 @@ const Home = () => {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
+      {/* TABS COMPONENT */}
+      <strong>TABS COMPONENT</strong>
+      <div className="w-10/12 flex-col gap-4 flex items-center">
+        <Tabs />
+      </div>
       <div className="w-10/12 flex-col gap-4 flex items-center">
         {/* SWITCH COMPONENT */}
         <strong>SWITCH COMPONENT</strong>
+
         <div className="flex gap-4">
           <div className="flex flex-col items-center gap-4">
             <div className="mb-2 h-6 flex items-center">
