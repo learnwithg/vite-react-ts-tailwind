@@ -273,9 +273,8 @@ const Home = () => {
       <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
         <ComboBox
           label="Label"
-          isMulti
           options={optionsList}
-          onChange={handleChange}
+          onChange={(e) => console.log(e?.label)}
           error="This is an error"
           variant="filled"
         />
