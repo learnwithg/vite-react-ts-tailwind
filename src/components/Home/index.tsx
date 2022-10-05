@@ -1,4 +1,8 @@
+
 import Callout from '#components/core/Callout'
+
+import { Select } from '#components/core'
+
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -13,6 +17,15 @@ import Dialog from '#components/core/Dialog'
 import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
+import { OptionDefaultFormat } from '#components/core/Select'
+import { MultiValue } from 'react-select'
+
+export const optionsList: OptionDefaultFormat[] = [
+  { value: 'Option 1', label: 'Option 1' },
+  { value: 'Option 2', label: 'Option 2' },
+  { value: 'option 3', label: 'Option 3' },
+  { value: 'option 4', label: 'Option 4' }
+]
 
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
@@ -34,6 +47,10 @@ const Home = () => {
   const openAlertDialog = (variant: AlertDialogVariant) => {
     setActiveAlertDialogVariant(variant)
     setOpenAlertDialog()
+  }
+
+  const handleChange = (e: MultiValue<OptionDefaultFormat>) => {
+    console.log(e)
   }
 
   return (
@@ -254,6 +271,38 @@ const Home = () => {
           </div>
         </div>
         {/* !ALERT DIALOG COMPONENT */}
+      </div>
+
+      <p>Combobox | Filled</p>
+      <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
+        <Select
+          label="Label"
+          options={optionsList}
+          onChange={(e) => console.log(e)}
+          error="This is an error"
+          variant="filled"
+        />
+      </div>
+
+      <p>Combobox | Outlined</p>
+      <div className=" bg-slate-100 w-full   justify-center px-10 py-2">
+        <Select
+          isMulti
+          label="Label"
+          options={optionsList}
+          onChange={handleChange}
+          error="This is an error"
+          variant="outlined"
+          // components={{
+          //   MultiValue: (props) => {
+          //     return (
+          //       <components.MultiValue {...props}>
+          //         asdasdasds {props?.data.value}
+          //       </components.MultiValue>
+          //     )
+          //   }
+          // }}
+        />
       </div>
 
       {/* DIALOG COMPONENT USAGE */}
