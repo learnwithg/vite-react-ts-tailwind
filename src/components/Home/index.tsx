@@ -16,7 +16,7 @@ import { useState } from 'react'
 import { OptionDefaultFormat } from '#components/core/Select'
 import { MultiValue } from 'react-select'
 
-const optionsList: OptionDefaultFormat[] = [
+export const optionsList: OptionDefaultFormat[] = [
   { value: 'Option 1', label: 'Option 1' },
   { value: 'Option 2', label: 'Option 2' },
   { value: 'option 3', label: 'Option 3' },
