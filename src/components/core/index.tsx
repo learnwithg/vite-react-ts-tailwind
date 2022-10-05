@@ -1,7 +1,7 @@
 export { default as AlertDialog } from './AlertDialog'
 export { Button } from './Button'
 
-export { default as ComboBox } from './ComboBox'
+export { default as ComboBox } from './Select'
 
 export { default as Checkbox } from './Checkbox'
 export { default as Dialog } from './Dialog'

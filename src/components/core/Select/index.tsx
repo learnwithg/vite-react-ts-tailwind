@@ -51,9 +51,10 @@ const ComboBox = <
       {label && <p className="font-karla text-sm text-gray-800">{label}</p>}
 
       <Select
-        className="font-karla text-sm"
+        className="font-karla text-sm "
         isSearchable={rest.isSearchable ?? false}
         options={options}
+        placeholder="Select"
         components={{
           DropdownIndicator: (indicatorProps) => (
             <DropdownIndicator {...indicatorProps} isMenuOpen={isMenuOpen} />
@@ -77,6 +78,7 @@ const ComboBox = <
           menu: (provided) => ({
             ...provided,
             fontSize: '12px'
+            // paddingTop: '12px'
           }),
           option: (provided, { isSelected }) => {
             return {
@@ -108,7 +110,9 @@ const ComboBox = <
                 backgroundColor: variant === 'filled' ? '#F5F5F5' : 'none',
                 color: 'black'
               },
-              borderRadius: '0px 4px 4px 0px'
+              borderRadius: '0px 4px 4px 0px',
+              paddingTop: variant === 'filled' ? '11px' : '12px',
+              paddingBottom: variant === 'filled' ? '11px' : '12px'
             }
           },
           control: (provided, { selectProps }) => {
@@ -116,6 +120,8 @@ const ComboBox = <
               ...provided,
               backgroundColor: variant === 'filled' ? 'white' : 'none',
               width: '100%',
+              // paddingTop: '3px',
+              // paddingBottom: '3px',
               border: variant === 'filled' ? '1px solid #CACACA' : 'none',
               borderColor: selectProps['aria-errormessage'] ? 'red' : '#B9BCC1',
               boxShadow: isMenuOpen
@@ -141,7 +147,7 @@ const ComboBox = <
           multiValue: (styles) => {
             return {
               ...styles,
-              border: '1px solid #696D74'
+              border: '1px solid '
             }
           },
           multiValueRemove: (styles) => {
@@ -149,7 +155,7 @@ const ComboBox = <
               ...styles,
               background: 'transparent',
               '&:hover': {
-                background: 'transparent'
+                background: 'transparent '
               }
             }
           }
@@ -159,7 +165,11 @@ const ComboBox = <
         {...rest}
       />
 
-      {error && <span className="text-tiny">{error}</span>}
+      {error && (
+        <span className="text-tiny text-interactive-danger-neutral">
+          {error}
+        </span>
+      )}
     </div>
   )
 }

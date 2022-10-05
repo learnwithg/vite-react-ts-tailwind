@@ -13,8 +13,8 @@ import Dialog from '#components/core/Dialog'
 import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
-import { OptionDefaultFormat } from '#components/core/ComboBox'
-import { MultiValue, components } from 'react-select'
+import { OptionDefaultFormat } from '#components/core/Select'
+import { MultiValue } from 'react-select'
 
 const optionsList: OptionDefaultFormat[] = [
   { value: 'Option 1', label: 'Option 1' },
@@ -274,7 +274,7 @@ const Home = () => {
         <ComboBox
           label="Label"
           options={optionsList}
-          onChange={(e) => console.log(e?.label)}
+          onChange={handleChange}
           error="This is an error"
           variant="filled"
         />
@@ -289,15 +289,15 @@ const Home = () => {
           onChange={handleChange}
           error="This is an error"
           variant="outlined"
-          components={{
-            MultiValue: (props) => {
-              return (
-                <components.MultiValue {...props}>
-                  asdasdasds {props.data.value}
-                </components.MultiValue>
-              )
-            }
-          }}
+          // components={{
+          //   MultiValue: (props) => {
+          //     return (
+          //       <components.MultiValue {...props}>
+          //         asdasdasds {props?.data.value}
+          //       </components.MultiValue>
+          //     )
+          //   }
+          // }}
         />
       </div>
 
