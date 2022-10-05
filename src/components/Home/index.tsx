@@ -1,14 +1,4 @@
-
-import { Button } from '#components/core'
 import { ComboBox } from '#components/core'
-
-const optionsList = [
-  { value: 'Option 1', label: 'Option 1' },
-  { value: 'Option 2', label: 'Option 2' },
-  { value: 'option 3', label: 'Option 3' },
-  { value: 'option 4', label: 'Option 4' }
-]
-
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -23,7 +13,15 @@ import Dialog from '#components/core/Dialog'
 import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
+import { OptionDefaultFormat } from '#components/core/ComboBox'
+import { MultiValue, components } from 'react-select'
 
+const optionsList: OptionDefaultFormat[] = [
+  { value: 'Option 1', label: 'Option 1' },
+  { value: 'Option 2', label: 'Option 2' },
+  { value: 'option 3', label: 'Option 3' },
+  { value: 'option 4', label: 'Option 4' }
+]
 
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
@@ -45,6 +43,10 @@ const Home = () => {
   const openAlertDialog = (variant: AlertDialogVariant) => {
     setActiveAlertDialogVariant(variant)
     setOpenAlertDialog()
+  }
+
+  const handleChange = (e: MultiValue<OptionDefaultFormat>) => {
+    console.log(e)
   }
 
   return (
@@ -267,13 +269,13 @@ const Home = () => {
         {/* !ALERT DIALOG COMPONENT */}
       </div>
 
-
       <p>Combobox | Filled</p>
       <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
         <ComboBox
           label="Label"
+          isMulti
           options={optionsList}
-          onChange={(e) => console.log(e?.value)} //Get the value here
+          onChange={handleChange}
           error="This is an error"
           variant="filled"
         />
@@ -282,11 +284,21 @@ const Home = () => {
       <p>Combobox | Outlined</p>
       <div className=" bg-slate-100 w-full   justify-center px-10 py-2">
         <ComboBox
+          isMulti
           label="Label"
           options={optionsList}
-          onChange={(e) => console.log(e?.value)} //Get the value here
+          onChange={handleChange}
           error="This is an error"
           variant="outlined"
+          components={{
+            MultiValue: (props) => {
+              return (
+                <components.MultiValue {...props}>
+                  asdasdasds {props.data.value}
+                </components.MultiValue>
+              )
+            }
+          }}
         />
       </div>
 
@@ -319,7 +331,6 @@ const Home = () => {
         cancelButtonText="Go Back"
         okButtonText="Proceed"
       />
-
     </div>
   )
 }

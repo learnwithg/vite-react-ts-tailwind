@@ -4,7 +4,6 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 import { selectThemeColors } from './theme'
 import Select, {
-  CSSObjectWithLabel,
   GroupBase,
   Props,
   components,
@@ -20,7 +19,7 @@ export type OptionDefaultFormat = {
   icon?: JSX.Element
 }
 
-export const ComboBox = <
+const ComboBox = <
   Option extends OptionDefaultFormat,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option & OptionDefaultFormat> = GroupBase<
@@ -32,7 +31,6 @@ export const ComboBox = <
     label?: string
     error?: string
     selected?: string | number | string[] | number[]
-    renderValueStyles?: (e: OptionDefaultFormat) => CSSObjectWithLabel
   }
 ) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false) //State manager for changing ArrowIcon
@@ -41,38 +39,26 @@ export const ComboBox = <
     className,
     label,
     error,
-    renderValueStyles,
     options,
     isMulti,
     defaultValue,
-    variant,
+    variant = 'outlined',
     ...rest
   } = props
-
-  const DropdownIndicator = (
-    props: DropdownIndicatorProps<Option, IsMulti, Group>
-  ) => {
-    return (
-      components.DropdownIndicator && (
-        <components.DropdownIndicator {...props}>
-          {isMenuOpen ? (
-            <ChevronUpIcon className="w-5 text-branding-pumpkin" />
-          ) : (
-            <ChevronDownIcon className="w-5" />
-          )}
-        </components.DropdownIndicator>
-      )
-    )
-  }
 
   return (
     <div className={classNames(className && className, 'group')}>
       {label && <p className="font-karla text-sm text-gray-800">{label}</p>}
+
       <Select
-        className=" font-karla text-sm"
+        className="font-karla text-sm"
         isSearchable={rest.isSearchable ?? false}
         options={options}
-        components={{ DropdownIndicator }}
+        components={{
+          DropdownIndicator: (indicatorProps) => (
+            <DropdownIndicator {...indicatorProps} isMenuOpen={isMenuOpen} />
+          )
+        }}
         defaultValue={defaultValue}
         onMenuOpen={() => {
           setIsMenuOpen(true)
@@ -138,7 +124,7 @@ export const ComboBox = <
                   : '0px 1px 0.5px 0.1px #FF7200'
                 : variant === 'filled'
                 ? ''
-                : '0px 1px 0.5px 0.1px #ffffff',
+                : '0px 1px 0.5px 0.1px #CACACA',
               '&:hover': {
                 boxShadow:
                   variant === 'filled'
@@ -152,13 +138,10 @@ export const ComboBox = <
             display: 'flex', // To keep icon and label aligned
             alignItems: 'center'
           }),
-          multiValue: (styles, { data }) => {
+          multiValue: (styles) => {
             return {
               ...styles,
-              border: '1px solid #696D74',
-              ...(renderValueStyles
-                ? renderValueStyles(data)
-                : { color: '#696D74' })
+              border: '1px solid #696D74'
             }
           },
           multiValueRemove: (styles) => {
@@ -180,3 +163,29 @@ export const ComboBox = <
     </div>
   )
 }
+
+const DropdownIndicator = <
+  Option extends OptionDefaultFormat,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option & OptionDefaultFormat> = GroupBase<
+    Option & OptionDefaultFormat
+  >
+>(
+  props: DropdownIndicatorProps<Option, IsMulti, Group> & {
+    isMenuOpen: boolean
+  }
+) => {
+  const { isMenuOpen, ...rest } = props
+
+  return (
+    <components.DropdownIndicator {...rest}>
+      {isMenuOpen ? (
+        <ChevronUpIcon className="w-5 text-branding-pumpkin" />
+      ) : (
+        <ChevronDownIcon className="w-5" />
+      )}
+    </components.DropdownIndicator>
+  )
+}
+
+export default ComboBox
