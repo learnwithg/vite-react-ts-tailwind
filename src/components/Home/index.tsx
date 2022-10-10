@@ -1,8 +1,5 @@
-
 import Callout from '#components/core/Callout'
-
 import { Select } from '#components/core'
-
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -19,6 +16,7 @@ import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
 import { OptionDefaultFormat } from '#components/core/Select'
 import { MultiValue } from 'react-select'
+import { BadgeStatus } from '#components/core'
 
 export const optionsList: OptionDefaultFormat[] = [
   { value: 'Option 1', label: 'Option 1' },
@@ -57,31 +55,34 @@ const Home = () => {
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
       <div className="w-10/12 flex-col gap-4 flex items-center">
         {/* SWITCH COMPONENT */}
-        <strong>SWITCH COMPONENT</strong>
-        <div className="flex gap-4">
-          <div className="flex flex-col items-center gap-4">
-            <div className="mb-2 h-6 flex items-center">
+        <div className="mt-24 py-10">
+          <strong>SWITCH COMPONENT</strong>
+          <div className="flex gap-4 justify-center items-center  ">
+            <span>
               <Toggle
                 enabled={enabled}
-                size="base"
-                onChangeValue={setEnabled}
+                onChangeValue={() => setEnabled(!enabled)}
+                size="sm"
               />
-            </div>
-            <p>base</p>
-          </div>
-
-          <div className="flex flex-col items-center gap-4">
-            <div className="mb-2 h-6 flex items-center">
-              <Toggle enabled={enabled} size="sm" onChangeValue={setEnabled} />
-            </div>
-            <p>sm</p>
+              <p>sm</p>
+            </span>
+            <span>
+              <Toggle
+                enabled={enabled}
+                onChangeValue={() => setEnabled(!enabled)}
+                size="base"
+              />
+              <p>base</p>
+            </span>
           </div>
         </div>
+
         {/* !SWITCH COMPONENT */}
 
         <span className="w-full h-[1px] bg-gray-300" />
 
         {/* CHECKBOX COMPONENT */}
+
         <strong>CHECKBOX COMPONENT</strong>
         <div className="flex gap-4 mt-4">
           <div className="flex flex-col items-center gap-4">
@@ -339,12 +340,23 @@ const Home = () => {
 
       {/* CALLOUT COMPONENT */}
       <strong>CALLOUT COMPONENT</strong>
-
       <div className="bg-gray-200 w-full flex items-center justify-center p-5">
         <Callout
           title="This is a test callout component"
           info="Upload your store’s logo, change colors and fonts, and more."
           buttonLabel="Get Now"
+        />
+      </div>
+      {/* BADGE X STATUS COMPONENT */}
+      <span className="w-full h-[1px] bg-gray-300" />
+      <strong>BADGE X STATUS COMPONENT</strong>
+      <div className="w-full flex items-center justify-center p-5">
+        {/* Set props to withIcon={true} if you want the variant with ICON instead of BULLET */}
+        <BadgeStatus
+          label="Badge Label"
+          variant="success"
+          withIcon={true}
+          size="sm"
         />
       </div>
     </div>
