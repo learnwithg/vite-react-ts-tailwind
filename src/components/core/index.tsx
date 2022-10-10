@@ -7,3 +7,6 @@ export { default as Radio } from './Radio'
 export { Toggle } from './Switch'
 export { default as Toast } from './Toast'
 export { Tabs } from './Tabs'
+export { default as Callout } from './Callout'
+export { default as Select } from './Select'
+

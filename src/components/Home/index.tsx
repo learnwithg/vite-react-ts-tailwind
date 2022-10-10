@@ -1,3 +1,8 @@
+
+import Callout from '#components/core/Callout'
+
+import { Select } from '#components/core'
+
 import SplitButton from '#components/core/SplitButton'
 import {
   CloudArrowDownIcon,
@@ -13,6 +18,15 @@ import Dialog from '#components/core/Dialog'
 import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
+import { OptionDefaultFormat } from '#components/core/Select'
+import { MultiValue } from 'react-select'
+
+export const optionsList: OptionDefaultFormat[] = [
+  { value: 'Option 1', label: 'Option 1' },
+  { value: 'Option 2', label: 'Option 2' },
+  { value: 'option 3', label: 'Option 3' },
+  { value: 'option 4', label: 'Option 4' }
+]
 
 import {
   BuildingOfficeIcon,
@@ -52,7 +66,11 @@ const Home = () => {
     setOpenAlertDialog()
   }
 
-  // const tabs = useAppSelector((state) => state.tabs.tabValue) // INITIAL STATE FOR TABS COMPONENT
+
+  const handleChange = (e: MultiValue<OptionDefaultFormat>) => {
+    console.log(e)
+  }
+
 
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
@@ -283,6 +301,38 @@ const Home = () => {
         {/* !ALERT DIALOG COMPONENT */}
       </div>
 
+      <p>Combobox | Filled</p>
+      <div className=" bg-slate-100 w-full  justify-center px-10 py-2">
+        <Select
+          label="Label"
+          options={optionsList}
+          onChange={(e) => console.log(e)}
+          error="This is an error"
+          variant="filled"
+        />
+      </div>
+
+      <p>Combobox | Outlined</p>
+      <div className=" bg-slate-100 w-full   justify-center px-10 py-2">
+        <Select
+          isMulti
+          label="Label"
+          options={optionsList}
+          onChange={handleChange}
+          error="This is an error"
+          variant="outlined"
+          // components={{
+          //   MultiValue: (props) => {
+          //     return (
+          //       <components.MultiValue {...props}>
+          //         asdasdasds {props?.data.value}
+          //       </components.MultiValue>
+          //     )
+          //   }
+          // }}
+        />
+      </div>
+
       {/* DIALOG COMPONENT USAGE */}
       <Dialog open={dialogIsOpen} closeDialog={closeDialog} width={dialogWidth}>
         <Dialog.Title title="Title" />
@@ -312,6 +362,19 @@ const Home = () => {
         cancelButtonText="Go Back"
         okButtonText="Proceed"
       />
+
+      <span className="w-full h-[1px] bg-gray-300" />
+
+      {/* CALLOUT COMPONENT */}
+      <strong>CALLOUT COMPONENT</strong>
+
+      <div className="bg-gray-200 w-full flex items-center justify-center p-5">
+        <Callout
+          title="This is a test callout component"
+          info="Upload your store’s logo, change colors and fonts, and more."
+          buttonLabel="Get Now"
+        />
+      </div>
     </div>
   )
 }
