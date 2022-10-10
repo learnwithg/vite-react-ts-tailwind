@@ -23,6 +23,9 @@ export const Tabs: FCC<ITabProps> = ({ tabs, activeTab, onChange }) => {
     setActive(e.value)
   }
 
+  const activeStyle =
+    'border-branding-pumpkin px-2 text-branding-pumpkin hover:cursor-pointer transition duration-75 ease-in'
+
   return (
     <div className="font-karla text-sm">
       <div className="sm:hidden">
@@ -48,8 +51,8 @@ export const Tabs: FCC<ITabProps> = ({ tabs, activeTab, onChange }) => {
               key={tab.name}
               className={classNames(
                 tab.value === active
-                  ? 'border-branding-pumpkin px-2 text-branding-pumpkin hover:cursor-pointer'
-                  : 'border-transparent px-2 rounded-t-md text-main-body hover:text-main-body hover:bg-interactive-secondary-hovered hover:cursor-pointer  ',
+                  ? activeStyle
+                  : 'border-transparent px-2 rounded-t-md text-main-body hover:text-main-body hover:bg-interactive-secondary-hovered hover:cursor-pointer hover:duration-100 hover:ease-in  ',
                 'group inline-flex items-center py-2 border-b-2 font-medium text-sm'
               )}
               aria-current={tab.value === active ? 'page' : undefined}
