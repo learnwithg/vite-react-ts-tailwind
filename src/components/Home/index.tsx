@@ -14,6 +14,22 @@ import { Toggle } from '#components/core/Switch'
 import { useDialogState } from '#rtkhooks/useDialogState'
 import { useState } from 'react'
 
+import {
+  BuildingOfficeIcon,
+  CreditCardIcon,
+  UserIcon,
+  UsersIcon
+} from '@heroicons/react/20/solid'
+
+// import { useAppSelector } from '#rtkhooks/app'
+
+export const tabsList = [
+  { name: 'Tab One', value: 'one', icon: UserIcon },
+  { name: 'Tab Two', value: 'two', icon: BuildingOfficeIcon },
+  { name: 'Tab Three', value: 'three', icon: UsersIcon },
+  { name: 'Tab Four', value: 'four', icon: CreditCardIcon }
+]
+
 const Home = () => {
   const [enabled, setEnabled] = useState<boolean>(true)
   const [dialogIsOpen, closeDialog, setOpenDialog] = useDialogState()
@@ -36,12 +52,17 @@ const Home = () => {
     setOpenAlertDialog()
   }
 
+  // const tabs = useAppSelector((state) => state.tabs.tabValue) // INITIAL STATE FOR TABS COMPONENT
+
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
       {/* TABS COMPONENT */}
       <strong>TABS COMPONENT</strong>
       <div className="w-10/12 flex-col gap-4 flex items-center">
-        <Tabs />
+        <div className="shadow ">
+          <h1 className="font-barlow font-bold p-4">Header Title</h1>
+          <Tabs tabs={tabsList} activeTab="four" />
+        </div>
       </div>
       <div className="w-10/12 flex-col gap-4 flex items-center">
         {/* SWITCH COMPONENT */}

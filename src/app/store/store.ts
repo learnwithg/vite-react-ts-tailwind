@@ -11,6 +11,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { erpApi } from '../api/erp-api'
+// import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 /**
  * ### App wide combined Reducers
@@ -72,3 +73,4 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
+// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

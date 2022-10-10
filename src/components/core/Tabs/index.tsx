@@ -1,22 +1,28 @@
-import {
-  BuildingOfficeIcon,
-  CreditCardIcon,
-  UserIcon,
-  UsersIcon
-} from '@heroicons/react/20/solid'
+// import { useState } from 'react'
+import { FCC } from '#utils/FCC'
+import { classNames } from '#utils/classNames'
+import React, { Key, useState } from 'react'
 
-const tabs = [
-  { name: 'Tab One', href: '#', icon: UserIcon, current: true },
-  { name: 'Tab Two', href: '#', icon: BuildingOfficeIcon, current: false },
-  { name: 'Tab Three', href: '#', icon: UsersIcon, current: false },
-  { name: 'Tab Four', href: '#', icon: CreditCardIcon, current: false }
-]
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+export interface TabItem {
+  name: string | number
+  value: string | number
+  icon?: (props: React.ComponentProps<'svg'>) => JSX.Element
 }
 
-export default function Tabs() {
+interface ITabProps {
+  tabs: TabItem[]
+  activeTab?: string | number
+  onChange?: (e: TabItem) => void
+}
+
+export const Tabs: FCC<ITabProps> = ({ tabs, activeTab, onChange }) => {
+  const [active, setActive] = useState(activeTab ?? '')
+
+  const tabOnClickHandler = (e: TabItem) => {
+    onChange && onChange(e)
+    setActive(e.value)
+  }
+
   return (
     <div className="font-karla text-sm">
       <div className="sm:hidden">
@@ -27,46 +33,44 @@ export default function Tabs() {
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-branding-pumpkin focus:ring-branding-pumpkin"
-          //   defaultValue={tabs.find((tab) => tab.current).name}
+          className="block w-full rounded-t-md border-gray-300 focus:border-branding-pumpkin focus:ring-branding-pumpkin"
         >
-          {tabs.map((tab) => (
+          {tabs?.map((tab: { name: Key | null | undefined }) => (
             <option key={tab.name}>{tab.name}</option>
           ))}
         </select>
       </div>
       <div className="hidden sm:block">
-        {/* <div className="border-b border-gray-400"> */}
-        <nav className="-mb-px flex gap-2 " aria-label="Tabs">
+        <nav className=" flex " aria-label="Tabs">
           {tabs.map((tab) => (
-            <a
-              onClick={(e) => console.log(e.currentTarget)}
+            <div
+              onClick={() => tabOnClickHandler(tab)}
               key={tab.name}
-              href={tab.href}
               className={classNames(
-                tab.current
-                  ? 'border-branding-pumpkin text-branding-pumpkin'
-                  : 'border-transparent  px-5 py-3 rounded text-main-body hover:text-main-body hover:bg-interactive-secondary-hovered ',
-                'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm'
+                tab.value === active
+                  ? 'border-branding-pumpkin px-2 text-branding-pumpkin hover:cursor-pointer'
+                  : 'border-transparent px-2 rounded-t-md text-main-body hover:text-main-body hover:bg-interactive-secondary-hovered hover:cursor-pointer  ',
+                'group inline-flex items-center py-2 border-b-2 font-medium text-sm'
               )}
-              aria-current={tab.current ? 'page' : undefined}
+              aria-current={tab.value === active ? 'page' : undefined}
             >
-              <div className="flex px-2">
-                <tab.icon
-                  className={classNames(
-                    tab.current
-                      ? 'text-branding-pumpkin'
-                      : 'text-main-body group-hover:text-main-body',
-                    '-ml-0.5 mr-2 h-5 w-5'
-                  )}
-                  aria-hidden="true"
-                />
-                <span>{tab.name}</span>
+              <div className="flex items-center py-0.5 px-2 ">
+                {tab.icon && (
+                  <tab.icon
+                    className={classNames(
+                      tab.value === active
+                        ? 'text-branding-pumpkin'
+                        : 'text-main-body group-hover:text-main-body',
+                      '-ml-0.5 mr-2 h-5 w-4'
+                    )}
+                    aria-hidden="true"
+                  />
+                )}
+                <span className="leading-none py-1">{tab.name}</span>
               </div>
-            </a>
+            </div>
           ))}
         </nav>
-        {/* </div> */}
       </div>
     </div>
   )
