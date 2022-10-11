@@ -350,14 +350,140 @@ const Home = () => {
       {/* BADGE X STATUS COMPONENT */}
       <span className="w-full h-[1px] bg-gray-300" />
       <strong>BADGE X STATUS COMPONENT</strong>
-      <div className="w-full flex items-center justify-center p-5">
+      <div className="w-full flex flex-col gap-4 items-center justify-center p-5">
         {/* Set props to withIcon={true} if you want the variant with ICON instead of BULLET */}
-        <BadgeStatus
-          label="Badge Label"
-          variant="success"
-          withIcon={true}
-          size="sm"
-        />
+        {/* Set props to labelOnly to remove the icon */}
+        {/* Label props is optional */}
+
+        <p>Badge label only | base</p>
+        <div className="flex gap-2">
+          <BadgeStatus
+            labelOnly
+            label="Neutral"
+            variant="neutral"
+            size="base"
+          />
+          <BadgeStatus
+            labelOnly
+            label="Success"
+            variant="success"
+            size="base"
+          />
+          <BadgeStatus
+            labelOnly
+            label="Information"
+            variant="information"
+            size="base"
+          />
+          <BadgeStatus
+            labelOnly
+            label="Warning"
+            variant="warning"
+            size="base"
+          />
+          <BadgeStatus labelOnly label="Danger" variant="danger" size="base" />
+        </div>
+        <p>Badge label only | sm</p>
+        <div className="flex gap-2">
+          <BadgeStatus labelOnly label="Neutral" variant="neutral" size="sm" />
+          <BadgeStatus labelOnly label="Success" variant="success" size="sm" />
+          <BadgeStatus
+            labelOnly
+            label="Information"
+            variant="information"
+            size="sm"
+          />
+          <BadgeStatus labelOnly label="Warning" variant="warning" size="sm" />
+          <BadgeStatus labelOnly label="Danger" variant="danger" size="base" />
+        </div>
+        <p>Badge with Label & Icon | base</p>
+        <div className="flex gap-2">
+          <BadgeStatus
+            label="Neutral"
+            variant="neutral"
+            withIcon={true}
+            size="base"
+          />
+          <BadgeStatus
+            label="Success"
+            variant="success"
+            withIcon={true}
+            size="base"
+          />
+          <BadgeStatus
+            label="Information"
+            variant="information"
+            withIcon={true}
+            size="base"
+          />
+          <BadgeStatus
+            label="Warning"
+            variant="warning"
+            withIcon={true}
+            size="base"
+          />
+          <BadgeStatus
+            label="Danger"
+            variant="danger"
+            withIcon={true}
+            size="base"
+          />
+        </div>
+        <p>Badge with Label & Icon | sm</p>
+        <div className="flex gap-2">
+          <BadgeStatus
+            label="Neutral"
+            variant="neutral"
+            withIcon={true}
+            size="sm"
+          />
+          <BadgeStatus
+            label="Success"
+            variant="success"
+            withIcon={true}
+            size="sm"
+          />
+          <BadgeStatus
+            label="Information"
+            variant="information"
+            withIcon={true}
+            size="sm"
+          />
+          <BadgeStatus
+            label="Warning"
+            variant="warning"
+            withIcon={true}
+            size="sm"
+          />
+          <BadgeStatus
+            label="Danger"
+            variant="danger"
+            withIcon={true}
+            size="sm"
+          />
+        </div>
+        <p>Badge neutral | sm & base </p>
+        <div className="flex gap-2">
+          <BadgeStatus
+            label="Badge Label"
+            variant="neutral"
+            withIcon={true}
+            size="sm"
+          />
+          <BadgeStatus
+            label="Badge Label"
+            variant="neutral"
+            withIcon={true}
+            size="base"
+          />
+        </div>
+        <p>Badge without label | sm</p>
+        <div className="flex gap-2">
+          <BadgeStatus variant="success" withIcon={true} size="sm" />
+          <BadgeStatus variant="information" withIcon={true} size="sm" />
+          <BadgeStatus variant="warning" withIcon={true} size="sm" />
+          <BadgeStatus variant="danger" withIcon={true} size="sm" />
+        </div>
       </div>
     </div>
   )
