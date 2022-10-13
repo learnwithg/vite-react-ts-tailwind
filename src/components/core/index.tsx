@@ -9,4 +9,4 @@ export { default as Toast } from './Toast'
 export { Tabs } from './Tabs'
 export { default as Callout } from './Callout'
 export { default as Select } from './Select'
-
+export { default as BadgeStatus } from './BadgeStatus'
