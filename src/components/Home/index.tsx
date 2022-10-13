@@ -8,6 +8,7 @@ import {
   TrashIcon
 } from '@heroicons/react/24/solid'
 
+import { Tabs } from '#components/core'
 import { Button, Checkbox } from '#components/core'
 import AlertDialog, { AlertDialogVariant } from '#components/core/AlertDialog'
 import Dialog from '#components/core/Dialog'
@@ -23,6 +24,22 @@ export const optionsList: OptionDefaultFormat[] = [
   { value: 'Option 2', label: 'Option 2' },
   { value: 'option 3', label: 'Option 3' },
   { value: 'option 4', label: 'Option 4' }
+]
+
+import {
+  BuildingOfficeIcon,
+  CreditCardIcon,
+  UserIcon,
+  UsersIcon
+} from '@heroicons/react/20/solid'
+
+// import { useAppSelector } from '#rtkhooks/app'
+
+export const tabsList = [
+  { name: 'Tab One', value: 'one', icon: UserIcon },
+  { name: 'Tab Two', value: 'two', icon: BuildingOfficeIcon },
+  { name: 'Tab Three', value: 'three', icon: UsersIcon },
+  { name: 'Tab Four', value: 'four', icon: CreditCardIcon }
 ]
 
 const Home = () => {
@@ -47,14 +64,25 @@ const Home = () => {
     setOpenAlertDialog()
   }
 
+
   const handleChange = (e: MultiValue<OptionDefaultFormat>) => {
     console.log(e)
   }
 
+
   return (
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-6">
+      {/* TABS COMPONENT */}
+      <strong>TABS COMPONENT</strong>
+      <div className="w-10/12 flex-col gap-4 flex items-center">
+        <div className="shadow ">
+          <h1 className="font-barlow font-bold p-4">Header Title</h1>
+          <Tabs tabs={tabsList} activeTab="four" />
+        </div>
+      </div>
       <div className="w-10/12 flex-col gap-4 flex items-center">
         {/* SWITCH COMPONENT */}
+
         <div className="mt-24 py-10">
           <strong>SWITCH COMPONENT</strong>
           <div className="flex gap-4 justify-center items-center  ">
