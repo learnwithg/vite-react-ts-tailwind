@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@tailwindcss/forms": "^0.5.3",
     "axios": "^0.27.2",
     "kmc-design-system": "^1.1.0",
     "react": "^18.2.0",

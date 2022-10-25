@@ -1,8 +1,11 @@
+import React from "react";
+import {Button} from 'kmc-design-system'
+ 
 function App() {
   return (
     <div>
       <p className='text-center text-red-500 font-karla'>React Vites</p>
-      <h1 className="font-barlow">Test</h1>
+    <Button>Test</Button>
     </div>
   );
 }
