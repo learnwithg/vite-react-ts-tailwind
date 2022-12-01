@@ -6,6 +6,8 @@ import HeaderPage from "./components/HeaderPage";
 import StepsContainer from "./ui/StepsContainer";
 import FormsContainer from "./components/FormsContainer";
 
+import Stepper from "./ui/Stepper";
+
 function App() {
   return (
     <React.Fragment>
@@ -16,6 +18,7 @@ function App() {
         <main>
           <HeaderPage />
           <div className="w-100 h-0.5 bg-orange-400 mb-8"></div>
+          <Stepper />
           <StepsContainer />
           <FormsContainer />
         </main>
