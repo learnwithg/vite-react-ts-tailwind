@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { useAppSelector } from "../../app/store/store";
-
-import { UserIcon } from "@heroicons/react/solid";
-
-import Button from "../../ui/Button";
-import SecondaryBtn from "../../ui/SecondaryBtn";
-
+import { Button } from "kmc-design-system";
 import UserAgreement from "../modal/UserAgreement";
+import { formValidateActions } from "../../app/store/formSlice";
+import { useDispatch } from "react-redux";
 
 const ReviewForm: React.FC = () => {
   const formImg = useAppSelector((state) => state.formState.formImg);
@@ -15,54 +12,47 @@ const ReviewForm: React.FC = () => {
 
   console.log(formData);
 
+  const dispatch = useDispatch();
+
   return (
     <div>
       {showTerms && <UserAgreement />}
-      <div className="font-Karla flex justify-center items-center gap-4 border p-2 rounded">
-        <div className=" w-1/2 ">
+      <div className="font-karla gap-4 p-2 rounded md:flex">
+        <div className=" w-full md:w-1/2 ">
           <img
             src={formImg}
             alt=""
             className="w-full h-full bg-contain rounded"
           />
         </div>
-        <div className="w-1/2 ">
+        <div className="w-full md:w-1/2">
           <span className="flex items-center gap-2">
-            <UserIcon className="w-5 h-5" />
-            <h1 className="text-xs font-Karla font-bold leading-none">
+            <h1 className="text-lg font-bold leading-none mt-4 md:mt-0">
               Review Details
             </h1>
           </span>
-          <div className="w-100 h-px bg-gray-300 my-4"></div>
+          <div className="w-100 h-1 bg-gray-300 my-2"></div>
           <section className=" flex flex-col gap-3">
             <div>
-              <h3 className="block text-leading font-bold text-gray-900">
-                Name
-              </h3>
+              <h3 className="block text-leading font-bold ">Name</h3>
               <p className="text-leading">{formData.firstName}</p>
             </div>
             <div>
-              <h3 className="block text-leading font-bold text-gray-900">
-                Email Address
-              </h3>
+              <h3 className="block text-leading font-bold ">Email Address</h3>
               <p className="text-leading">{formData.email}</p>
             </div>
             <div>
-              <h3 className="block text-leading font-bold text-gray-900">
+              <h3 className="block text-leading font-bold ">
                 Company to visit
               </h3>
               <p className="text-leading">{formData.companyToVisit.name}</p>
             </div>
             <div>
-              <h3 className="block text-leading font-bold text-gray-900">
-                Person to visit
-              </h3>
+              <h3 className="block text-leading font-bold ">Person to visit</h3>
               <p className="text-leading">{formData.personToVisit.name}</p>
             </div>
             <div>
-              <h3 className="block text-leading font-bold text-gray-900">
-                Reason to visit
-              </h3>
+              <h3 className="block text-leading font-bold ">Reason to visit</h3>
               <p className="text-leading">{formData.reasonToVisit.name}</p>
             </div>
           </section>
@@ -94,9 +84,19 @@ const ReviewForm: React.FC = () => {
           </div>
         </fieldset>
       </div>
-      <div className="w-full flex gap-4 mt-4">
-        <SecondaryBtn labelName="Previous" />
-        <Button labelName="Submit" />
+      <div className="w-full flex gap-2 mt-4">
+        {/* <SecondaryBtn labelName="Previous" />
+      <  <Button labelName="Submit" />> */}
+        <Button
+          variant="secondary"
+          className="w-full"
+          onClick={() =>
+            dispatch(formValidateActions.validateSnapshotForm(false))
+          }
+        >
+          Previous
+        </Button>
+        <Button className="w-full">Submit</Button>
       </div>
     </div>
   );

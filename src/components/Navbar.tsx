@@ -1,22 +1,18 @@
 import React from "react";
-
 import kmcLogo from "../assets/logo/kmc-vms-logo.png";
-import date from "date-and-time";
+import useTime from "#rtkhooks/useTime";
 
 const Navbar: React.FC = () => {
-  const now = new Date();
-
-  const dateNow = date.format(now, "MMMM DD, YYYY");
-  const timeNow = date.format(now, "hh:mm:s A");
+  const { timeNow, dateNow } = useTime();
 
   return (
-    <nav className=" bg-blue py-4 font-Karla font-bold flex justify-between w-full px-20">
+    <nav className="py-4 font-bold flex justify-between w-full px-5 bg-branding-navy font-karla">
       <div>
-        <img src={kmcLogo} alt="Company Logo" className="h-12" />
+        <img src={kmcLogo} alt="Company Logo" className="w-28" />
       </div>
-      <div className="text-white text-xs ">
-        <p>{dateNow}</p>
-        <p className="text-right">{timeNow}</p>
+      <div className="flex flex-col">
+        <p className="text-xs text-white text-right">{dateNow}</p>
+        <p className="text-xs text-white text-right">{timeNow}</p>
       </div>
     </nav>
   );

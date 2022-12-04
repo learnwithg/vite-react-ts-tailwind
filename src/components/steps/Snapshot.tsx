@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Webcam from "react-webcam";
-import Button from "../../ui/Button";
-import SecondaryBtn from "../../ui/SecondaryBtn";
+import { Button } from "kmc-design-system";
 
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/store/store";
@@ -21,13 +20,13 @@ const Snapshot = () => {
   const capture = React.useCallback(() => {
     setIsClicked(true);
     setTimeout(() => {
-      const imageSrc = webcamRef.current.getScreenshot({
+      const imageSrc = webcamRef.current?.getScreenshot({
         width: 600,
         height: 800,
       });
 
       dispatch(formActions.pushScreenshot(imageSrc));
-      dispatch(formValidateActions.validateSnapshotForm());
+      dispatch(formValidateActions.validateSnapshotForm(true));
     }, 3000);
   }, [webcamRef]);
 
@@ -38,25 +37,36 @@ const Snapshot = () => {
   }, [counter, isClicked]);
 
   return (
-    <div className="font-Karla flex flex-col justify-center items-center">
-      <h1 className="text-xl font-Karla font-bold text-pumpkin ">
+    <div className="font-Karla justify-center items-center">
+      <p className="text-xl font-karla font-bold text-pumpkin mb-2 text-center">
         Tap to start capturing photo
-      </h1>
-      <p>{counter}</p>
+      </p>
+      {/* <p>{counter}</p> */}
+
       <div className="drop-shadow-md  ">
         <Webcam
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
           onClick={capture}
-          className="rounded shadow  hover:cursor-pointer"
+          className="rounded shadow md:w-full hover:cursor-pointer"
         />
         {/* <button onClick={capture}>Capture photo</button> */}
         {/* {imgSrc && <img src={imgSrc} />} */}
-        <img src={formImg} alt="" />
+
         <div className="w-full flex gap-4 mt-2">
-          <SecondaryBtn labelName="Previous" />
-          <Button labelName="Next" />
+          <Button
+            className="w-full"
+            variant="secondary"
+            onClick={() =>
+              dispatch(formValidateActions.validateFillUpForm(false))
+            }
+          >
+            Previous
+          </Button>
+          <Button className="w-full">Next</Button>
+          {/* <SecondaryBtn labelName="Previous" />
+          <Button labelName="Next" /> */}
         </div>
       </div>
     </div>

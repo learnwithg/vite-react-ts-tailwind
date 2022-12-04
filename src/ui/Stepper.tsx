@@ -1,47 +1,67 @@
-import React from "react";
+import React, { ReactNode, SVGProps } from "react";
 
-const steps = [
-  { id: "Step 1", name: "Job details", href: "#", status: "complete" },
-  { id: "Step 2", name: "Application form", href: "#", status: "current" },
-  { id: "Step 3", name: "Preview", href: "#", status: "upcoming" },
-];
+export type IStepsProps = {
+  steps: {
+    id: string;
+    name: string;
+    href: string;
+    status: string;
+    // icon: SVGProps<SVGSVGElement>;
+  }[];
+};
 
-const Stepper = () => {
+const Stepper: React.FC<IStepsProps> = (steps) => {
+  console.log(steps);
   return (
-    <nav aria-label="Progress">
+    <nav
+      aria-label="Progress"
+      className="bg-white rounded px-4 py-4 font-karla"
+    >
       <ol role="list" className="space-y-4 md:flex md:space-y-0 md:space-x-8">
-        {steps.map((step) => (
-          <li key={step.name} className="md:flex-1">
-            {step.status === "complete" ? (
+        {steps.steps.map((step) => (
+          <li key={step.name} className="md:flex-1 ">
+            {step.status === "COMPLETED" ? (
               <a
                 href={step.href}
-                className="group flex flex-col border-l-4 border-indigo-600 py-2 pl-4 hover:border-indigo-800 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
+                className="group flex flex-col border-l-4 border-main-success py-2 pl-4  md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
               >
-                <span className="text-sm font-medium text-indigo-600 group-hover:text-indigo-800">
+                <span className="text-main-success">{step.icon}</span>
+
+                <span className="text-xs font-bold text-main-success ">
                   {step.id}
                 </span>
-                <span className="text-sm font-medium">{step.name}</span>
+
+                <span className="text-base text-main-success font-bold">
+                  {step.name}
+                </span>
               </a>
-            ) : step.status === "current" ? (
+            ) : step.status === "CURRENT" ? (
               <a
                 href={step.href}
-                className="flex flex-col border-l-4 border-indigo-600 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
+                className="flex flex-col border-l-4 border-main-accent py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
                 aria-current="step"
               >
-                <span className="text-sm font-medium text-indigo-600">
+                <span className="text-main-accent">{step.icon}</span>
+
+                <span className="text-xs font-bold text-main-accent">
                   {step.id}
                 </span>
-                <span className="text-sm font-medium">{step.name}</span>
+                <span className="text-base text-gray-800 font-bold">
+                  {step.name}
+                </span>
               </a>
             ) : (
               <a
                 href={step.href}
-                className="group flex flex-col border-l-4 border-gray-200 py-2 pl-4 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
+                className="group flex flex-col border-l-4 border-gray-200 py-2 pl-4  md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0"
               >
-                <span className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
+                <span className="text-gray-500">{step.icon}</span>
+                <span className="text-xs font-bold text-gray-500 ">
                   {step.id}
                 </span>
-                <span className="text-sm font-medium">{step.name}</span>
+                <span className="text-base font-bold text-gray-500">
+                  {step.name}
+                </span>
               </a>
             )}
           </li>

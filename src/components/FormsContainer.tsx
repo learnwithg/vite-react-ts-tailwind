@@ -11,7 +11,7 @@ const FormsContainer: React.FC = () => {
   );
 
   return (
-    <div className="rounded w-full h-full bg-white mt-6 px-8  py-8 shadow">
+    <div className="rounded w-full h-full bg-white mt-6 px-4  py-4 shadow">
       {/* {formValidation.isFillUpFormValid ? <Snapshot /> : <FillUpForm />} */}
 
       {formValidation.isSnapshotFormValid ? (

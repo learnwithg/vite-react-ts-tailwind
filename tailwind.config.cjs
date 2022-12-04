@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{ts,tsx}"],
+  content: [
+    "./src/**/*.{ts,tsx}",
+    "node_modules/kmc-design-system/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     fontFamily: {
       barlow: ["Barlow Condensed"],

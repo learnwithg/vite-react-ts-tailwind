@@ -6,7 +6,7 @@ interface Props {
 
 const Container: React.FC<Props> = ({ children }) => {
   return (
-    <div className="w-full m-auto px-20 bg-gray-100 h-screen">{children}</div>
+    <div className="w-full m-auto px-5 bg-gray-100 h-screen">{children}</div>
   );
 };
 

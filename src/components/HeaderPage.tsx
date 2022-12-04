@@ -3,13 +3,11 @@ import React from "react";
 const HeaderPage: React.FC = () => {
   return (
     <React.Fragment>
-      <div className="leading-none py-8 mx-8 ">
-        <h4 className="text-l font-Karla font-bold text-pumpkin ">
+      <div className="font-bold py-4">
+        <p className="font-karla text-xs leading-none text-branding-pumpkin">
           ARMSTRONG 10TH
-        </h4>
-        <h1 className="text-headingOne font-Barlow font-bold ">
-          VISITORS LOGIN
-        </h1>
+        </p>
+        <p className="font-barlow text-2xl leading-none">VISITORS LOGIN</p>
       </div>
     </React.Fragment>
   );

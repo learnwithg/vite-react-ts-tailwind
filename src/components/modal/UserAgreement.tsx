@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { Button } from "kmc-design-system";
 
 export default function UserAgreement() {
   const [open, setOpen] = useState(true);
@@ -38,23 +39,23 @@ export default function UserAgreement() {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg ">
-                <div className="bg-blue w-full font-Barlow py-4 px-4">
-                  <p className="text-headingOne font-Barlow font-bold text-white mx-4">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white  pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg ">
+                <div className="bg-branding-navy w-full font-Barlow py-4 px-4">
+                  <p className="text-2xl font-barlow font-bold text-white mx-4">
                     KMC VMS
                   </p>
                 </div>
-                <div className="px-4">
+                <div className="px-4 font-karla ">
                   <div className="sm:flex sm:items-start sm:flex-col ">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-l font-Karla font-bold text-pumpkin mt-4"
+                        className="text-l font-bold text-pumpkin mt-4"
                       >
                         COMPANY CORPORATE POLICY
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500 font-Karla">
+                        <p className="text-sm text-gray-800 font-Karla">
                           KMC shall fully comply with the obligations and
                           requirements of the Data Privacy Act and, when
                           applicable, the GDPR. KMC’s officers, management, and
@@ -81,7 +82,7 @@ export default function UserAgreement() {
                         SECURITY OF PERSONAL DATA
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500 font-Karla">
+                        <p className="text-sm text-gray-800 font-Karla">
                           Physical records containing personal data are securely
                           stored in locked areas when not in use. Computer data
                           are stored on computer systems and storage media to
@@ -98,13 +99,17 @@ export default function UserAgreement() {
                     </div>
                   </div>
                   <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                    <button
+                    {/* <button
                       type="button"
                       className="font-Karla w-full mt-2 rounded bg-pumpkin p-3 text-white text-xs font-bold shadow-md"
                       onClick={() => setOpen(false)}
                     >
                       Continue
-                    </button>
+                    </button> */}
+                    <Button className="w-full" onClick={() => setOpen(false)}>
+                      {" "}
+                      Continue{" "}
+                    </Button>
                   </div>
                 </div>
               </Dialog.Panel>

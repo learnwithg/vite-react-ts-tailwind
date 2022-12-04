@@ -1,4 +1,4 @@
-import { apiSlice } from "#rtkfeatures/dogs/dogs-api-slice";
+// import { apiSlice } from "#rtkfeatures/dogs/dogs-api-slice";
 import { configureStore } from "@reduxjs/toolkit";
 
 import { TypedUseSelectorHook, useSelector } from "react-redux";
@@ -6,15 +6,18 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { formSlice, formsValidationSlice } from "./formSlice";
 import { stepperSlice } from "./stepperSlice";
 
+import { vmsApi } from "../query/vmsApi";
+
 export const store = configureStore({
   reducer: {
     formState: formSlice.reducer,
     formsValidation: formsValidationSlice.reducer,
     stepperState: stepperSlice.reducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    [vmsApi.reducerPath]: vmsApi.reducer,
+    // [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(apiSlice.middleware);
+    return getDefaultMiddleware().concat(vmsApi.middleware);
   },
 });
 

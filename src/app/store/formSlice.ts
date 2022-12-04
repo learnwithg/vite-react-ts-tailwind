@@ -11,11 +11,11 @@ export const formsValidationSlice = createSlice({
   name: "formValidState",
   initialState: formValidationState,
   reducers: {
-    validateFillUpForm(state) {
-      state.pagesValidation.isFillUpFormValid = true;
+    validateFillUpForm(state, action) {
+      state.pagesValidation.isFillUpFormValid = action.payload;
     },
-    validateSnapshotForm(state) {
-      state.pagesValidation.isSnapshotFormValid = true;
+    validateSnapshotForm(state, action) {
+      state.pagesValidation.isSnapshotFormValid = action.payload;
     },
   },
 });
