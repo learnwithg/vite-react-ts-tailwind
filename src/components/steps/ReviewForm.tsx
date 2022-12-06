@@ -3,6 +3,7 @@ import { useAppSelector } from "../../app/store/store";
 import { Button } from "kmc-design-system";
 import UserAgreement from "../modal/UserAgreement";
 import { formValidateActions } from "../../app/store/formSlice";
+import { stepperAction } from "../../app/store/stepperSlice";
 import { useDispatch } from "react-redux";
 
 const ReviewForm: React.FC = () => {
@@ -17,12 +18,12 @@ const ReviewForm: React.FC = () => {
   return (
     <div>
       {showTerms && <UserAgreement />}
-      <div className="font-karla gap-4 p-2 rounded md:flex">
+      <div className="font-karla gap-4 rounded md:flex">
         <div className=" w-full md:w-1/2 ">
           <img
             src={formImg}
-            alt=""
-            className="w-full h-full bg-contain rounded"
+            alt="Captured"
+            className="w-full h-80 bg-cover rounded"
           />
         </div>
         <div className="w-full md:w-1/2">
@@ -39,21 +40,21 @@ const ReviewForm: React.FC = () => {
             </div>
             <div>
               <h3 className="block text-leading font-bold ">Email Address</h3>
-              <p className="text-leading">{formData.email}</p>
+              <p className="text-leading">{formData.emailAddress}</p>
             </div>
             <div>
               <h3 className="block text-leading font-bold ">
                 Company to visit
               </h3>
-              <p className="text-leading">{formData.companyToVisit.name}</p>
+              <p className="text-leading">{formData.companyToVisit}</p>
             </div>
             <div>
               <h3 className="block text-leading font-bold ">Person to visit</h3>
-              <p className="text-leading">{formData.personToVisit.name}</p>
+              <p className="text-leading">{formData.personToVisit}</p>
             </div>
             <div>
               <h3 className="block text-leading font-bold ">Reason to visit</h3>
-              <p className="text-leading">{formData.reasonToVisit.name}</p>
+              <p className="text-leading">{formData.reasonToVisit}</p>
             </div>
           </section>
         </div>
@@ -90,9 +91,10 @@ const ReviewForm: React.FC = () => {
         <Button
           variant="secondary"
           className="w-full"
-          onClick={() =>
-            dispatch(formValidateActions.validateSnapshotForm(false))
-          }
+          onClick={() => {
+            dispatch(formValidateActions.validateSnapshotForm(false));
+            dispatch(stepperAction.prevStep("STEP 3"));
+          }}
         >
           Previous
         </Button>

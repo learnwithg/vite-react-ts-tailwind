@@ -1,12 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Console } from "console";
 
 export const initialStepperState = {
-  // stepState: {
-  //   current: "CURRENT",
-  //   upcoming: "UPCOMING",
-  //   completed: "COMPLETED",
-  // },
   stepState: [
     {
       id: "STEP 1",
@@ -22,7 +16,7 @@ export const initialStepperState = {
       status: "UPCOMING",
     },
     {
-      id: "STEP 4",
+      id: "STEP 3",
       name: "Review Form",
       href: "#",
       status: "UPCOMING",
@@ -34,13 +28,32 @@ export const stepperSlice = createSlice({
   name: "stepperSlice",
   initialState: initialStepperState,
   reducers: {
-    changeState(state, action) {
+    forwardStep(state, action) {
       const id = action.payload;
-      const found = initialStepperState.stepState.find((data) => {
-        return data.id;
-      });
-      console.log(found);
-      // state.stepState =
+      const stepIndex = initialStepperState.stepState.findIndex(
+        (data) => data.id === id
+      );
+      if (id === "STEP 1") {
+        state.stepState[stepIndex].status = "COMPLETED";
+        state.stepState[1].status = "CURRENT";
+      } else if (id === "STEP 2") {
+        state.stepState[stepIndex].status = "COMPLETED";
+        state.stepState[2].status = "CURRENT";
+      }
+    },
+    prevStep(state, action) {
+      const id = action.payload;
+      const stepIndex = initialStepperState.stepState.findIndex(
+        (data) => data.id === id
+      );
+      if (id === "STEP 2") {
+        state.stepState[stepIndex].status = "UPCOMING";
+        state.stepState[0].status = "CURRENT";
+        state.stepState[2].status = "UPCOMING";
+      } else if (id === "STEP 3") {
+        state.stepState[stepIndex].status = "UPCOMING";
+        state.stepState[1].status = "CURRENT";
+      }
     },
   },
 });

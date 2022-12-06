@@ -13,5 +13,8 @@ export const formSchema = yup.object().shape({
   personToVisit: yup
     .string()
     .required("Please select the person name you want to visit"),
+  personToVisitName: yup
+    .string()
+    .required("Please select the person name you want to visit"),
   reasonToVisit: yup.string().required("Please select a reason for your visit"),
 });

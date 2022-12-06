@@ -3,17 +3,15 @@ import Webcam from "react-webcam";
 import { Button } from "kmc-design-system";
 
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../app/store/store";
 import { formActions } from "../../app/store/formSlice";
 import { formValidateActions } from "../../app/store/formSlice";
+import { stepperAction } from "../../app/store/stepperSlice";
 
 const Snapshot = () => {
   const webcamRef = useRef(null);
 
   const [counter, setCounter] = useState(3);
   const [isClicked, setIsClicked] = useState(false);
-
-  const formImg = useAppSelector((state) => state.formState.formImg);
 
   const dispatch = useDispatch();
 
@@ -27,6 +25,7 @@ const Snapshot = () => {
 
       dispatch(formActions.pushScreenshot(imageSrc));
       dispatch(formValidateActions.validateSnapshotForm(true));
+      dispatch(stepperAction.forwardStep("STEP 2"));
     }, 3000);
   }, [webcamRef]);
 
@@ -41,9 +40,11 @@ const Snapshot = () => {
       <p className="text-xl font-karla font-bold text-pumpkin mb-2 text-center">
         Tap to start capturing photo
       </p>
-      {/* <p>{counter}</p> */}
 
-      <div className="drop-shadow-md  ">
+      <div className="drop-shadow-md relative  ">
+        <p className="font-barlow font-bold text-4xl text-white z-999 absolute left-4 top-2  ">
+          {counter}
+        </p>
         <Webcam
           audio={false}
           ref={webcamRef}
@@ -56,17 +57,18 @@ const Snapshot = () => {
 
         <div className="w-full flex gap-4 mt-2">
           <Button
-            className="w-full"
+            className="w-1/"
             variant="secondary"
-            onClick={() =>
-              dispatch(formValidateActions.validateFillUpForm(false))
-            }
+            onClick={() => {
+              dispatch(formValidateActions.validateFillUpForm(false));
+              dispatch(stepperAction.prevStep("STEP 2"));
+            }}
           >
             Previous
           </Button>
-          <Button className="w-full">Next</Button>
-          {/* <SecondaryBtn labelName="Previous" />
-          <Button labelName="Next" /> */}
+          <Button className="w-full" onClick={capture}>
+            Capture Photo
+          </Button>
         </div>
       </div>
     </div>

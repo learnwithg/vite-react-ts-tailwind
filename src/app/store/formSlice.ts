@@ -24,10 +24,10 @@ const initialFormState = {
   formData: {
     firstName: null,
     lastname: null,
-    email: null,
-    companyToVisit: { id: null, name: null },
-    personToVisit: { id: null, name: null },
-    reasonToVisit: { id: null, name: null },
+    emailAddress: null,
+    companyToVisit: null,
+    personToVisit: null,
+    reasonToVisit: null,
   },
   formImg: null,
 };
